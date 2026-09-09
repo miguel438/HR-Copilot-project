@@ -1,0 +1,72 @@
+[
+  {
+    "id": "req-t01-backend-senior",
+    "note": "Canonical req-001. Alice strong; James Anderson is the deliberate near-miss - right seniority and job family, wrong stack (Java/Azure).",
+    "text": "We are hiring a Senior Backend Engineer to own core Python services running on AWS. Requires strong Python experience, hands-on AWS infrastructure work, and experience with distributed/microservices systems. Minimum 5 years of experience."
+  },
+  {
+    "id": "req-t02-backend-mid",
+    "note": "Same family, lower bar - separates 'is a backend engineer' from 'is senior enough', which req-t01 alone cannot.",
+    "text": "Looking for a Backend Engineer to build and maintain REST APIs in Python. Django or FastAPI experience required, along with PostgreSQL and Docker. Minimum 2 years of experience."
+  },
+  {
+    "id": "req-t03-frontend",
+    "note": "Liam Wong is the only real fit. Backend engineers should not clear this on keyword overlap alone.",
+    "text": "We need a Frontend Engineer to build our customer-facing web application. Requires React, TypeScript and CSS, plus experience with responsive design and component libraries. Minimum 2 years of experience."
+  },
+  {
+    "id": "req-t04-data-analyst",
+    "note": "Canonical req-003. Both Maya Levi and Noah Kim should be plausible.",
+    "text": "Looking for a Data Analyst to build SQL-based reporting and dashboards for the operations team, with Python/pandas as a plus. Minimum 2 years of experience."
+  },
+  {
+    "id": "req-t05-data-analyst-senior",
+    "note": "Same family as req-t04 with a raised bar, so Noah Kim (2y) falls short where Maya Levi (4y) does not. This pair is what gives years_shortfall any signal at all.",
+    "text": "Hiring a Senior Data Analyst to own reporting for the commercial team and partner directly with stakeholders. Requires advanced SQL, Python for analysis, and dashboard tooling such as Tableau. Minimum 4 years of experience."
+  },
+  {
+    "id": "req-t06-devops",
+    "note": "Ryan Patel strong. Alice Chen has Docker/Kubernetes/CI-CD on her CV, so this tests whether job family beats keyword overlap.",
+    "text": "We are looking for a DevOps Engineer to own our deployment pipelines and cloud infrastructure. Requires Terraform, Kubernetes, CI/CD tooling and AWS. Minimum 5 years of experience."
+  },
+  {
+    "id": "req-t07-product-manager",
+    "note": "Olivia Martinez strong. A non-engineering requisition, needed so the model does not only ever see software roles.",
+    "text": "Seeking a Senior Product Manager to own the roadmap for our core platform. Requires customer discovery, roadmap ownership, and experience working closely with engineering teams to ship B2B software. Minimum 5 years of experience."
+  },
+  {
+    "id": "req-t08-ux-designer",
+    "note": "Sophie Turner strong.",
+    "text": "Hiring a Senior UX Designer to lead design for our web product. Requires user research, wireframing and prototyping, and experience building or maintaining a design system. Minimum 4 years of experience."
+  },
+  {
+    "id": "req-t09-sales-ae",
+    "note": "Emma Garcia strong. The only commercial requisition, and the clearest test that engineers are not returned for a sales role.",
+    "text": "We are hiring an Account Executive for our B2B SaaS sales team. Requires full-cycle pipeline management, consistent quota attainment, and CRM discipline. Minimum 3 years of experience."
+  },
+  {
+    "id": "req-t10-platform-adjacent",
+    "note": "The deliberate ambiguous case. Both a senior backend engineer and a senior DevOps engineer are genuinely defensible here, so it is where hand labels carry the most information and where the model is expected to be least certain.",
+    "text": "Looking for a Platform Engineer to build the internal tooling our product teams deploy on. Requires Python, AWS, Kubernetes and CI/CD pipelines. Minimum 5 years of experience."
+  },
+  {
+    "id": "req-t11-nomatch-captain",
+    "note": "Canonical req-002. A legitimate requisition with no plausible candidate in the corpus - the negatives that stop the model learning 'everyone is a partial fit'.",
+    "text": "Seeking a licensed ship captain to manage maritime freight logistics routes, crew scheduling, and port compliance for our shipping fleet. Minimum 5 years of experience."
+  },
+  {
+    "id": "req-t12-nomatch-nurse",
+    "note": "Second no-match, in a different direction from maritime so the model does not key on one vocabulary.",
+    "text": "We are recruiting a Registered Nurse for our outpatient clinic. Requires a current nursing licence, direct patient care experience, and familiarity with electronic health records. Minimum 3 years of experience."
+  },
+  {
+    "id": "req-t13-software-broad",
+    "note": "Broad enough that several engineers are plausible, but named in concrete technologies on purpose. An earlier draft asked for 'software development, code review and testing'; the Planner parsed those verbatim, they appear in no CV, and skill_overlap came out 0.0 for the candidate the Evaluator scored 10/10 - noise with the sign inverted. Also carries the useful negatives: Maya and Noah match Python but are analysts, so high skill overlap with the wrong job family must not read as a fit.",
+    "text": "We are hiring a Software Engineer for our product team. You might come from a backend or an infrastructure background. Requires Python, Docker, and experience building REST APIs against relational databases such as PostgreSQL. Minimum 3 years of experience."
+  },
+  {
+    "id": "req-t14-fullstack",
+    "note": "Needs both halves, and nobody in the corpus has both - Liam is frontend only, Alice and Daniel backend only. Should therefore produce partial labels rather than strong ones, which is the other thin band.",
+    "text": "Looking for a Full-Stack Engineer who can work across the whole product. Requires React and TypeScript on the front end and Python on the back end, plus experience with REST APIs and relational databases. Minimum 2 years of experience."
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "embedding_model": "text-embedding-3-small",
+  "collection_name": "hr_copilot_resumes",
+  "training_k": 40
+}

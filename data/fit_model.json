@@ -1,0 +1,82 @@
+{
+  "alpha": 10.0,
+  "band_centres": {
+    "0": 0.0,
+    "1": 5.0,
+    "2": 9.0
+  },
+  "clip": [
+    0.0,
+    10.0
+  ],
+  "coefficients": [
+    1.218906841,
+    -0.017098002,
+    -0.404086614,
+    1.01439559,
+    0.286030991
+  ],
+  "collection_name": "hr_copilot_resumes",
+  "created_utc": "2026-09-06T19:19:47Z",
+  "embedding_model": "text-embedding-3-small",
+  "feature_defaults": [
+    0.168367347,
+    0.392857143,
+    0.080782313,
+    0.152437642,
+    0.330387755
+  ],
+  "feature_names": [
+    "skill_overlap",
+    "years_surplus",
+    "years_shortfall",
+    "title_overlap",
+    "similarity"
+  ],
+  "intercept": 1.204081633,
+  "means": [
+    0.168367347,
+    0.392857143,
+    0.080782313,
+    0.152437642,
+    0.330387755
+  ],
+  "model": "ridge",
+  "schema_version": 1,
+  "stds": [
+    0.284897873,
+    0.375707949,
+    0.171467457,
+    0.296357183,
+    0.102500835
+  ],
+  "training": {
+    "band_counts": {
+      "0": 244,
+      "1": 24,
+      "2": 26
+    },
+    "baseline_band_accuracy": {
+      "predict the majority band": 0.8299,
+      "similarity alone": 0.8129,
+      "skill_overlap alone": 0.8639
+    },
+    "baseline_mae": {
+      "predict the majority band": 1.2041,
+      "predict the mean": 1.9986,
+      "similarity alone": 1.1928,
+      "skill_overlap alone": 0.8422
+    },
+    "label_override_rate": 0.0204,
+    "loco_band_accuracy": 0.8912,
+    "loco_mae": 0.7698,
+    "loro_mae": 0.7734,
+    "n_candidates": 21,
+    "n_original_pairs": 140,
+    "n_pairs": 294,
+    "n_requisitions": 14,
+    "n_synthetic_pairs": 154,
+    "typical_error": 0.8,
+    "verdict_vs_baselines": "beats every baseline on both MAE and band accuracy"
+  }
+}

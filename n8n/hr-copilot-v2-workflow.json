@@ -1,0 +1,946 @@
+{
+  "updatedAt": "2026-09-06T00:00:00.000Z",
+  "createdAt": "2026-09-05T00:00:00.000Z",
+  "id": "hrCopilotActionsV2",
+  "name": "HR Copilot v2 - n8n Orchestrated",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "screen",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "screen-webhook",
+      "name": "Screen Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "hr-copilot-screen"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "guardrail-chat-model",
+      "name": "Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        200,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "hrCopilotOpenAi",
+          "name": "OpenAI (auto)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.body.requisition_text }}",
+        "guardrails": {
+          "keywords": "ignore previous instructions, disregard previous, reveal your system prompt, you are now",
+          "jailbreak": {
+            "value": {
+              "threshold": 0.7
+            }
+          },
+          "topicalAlignment": {
+            "value": {
+              "threshold": 0.7,
+              "prompt": "Recruitment job requisitions only. IN SCOPE: text describing a role the company wants to hire for - a job title, required skills, seniority, years of experience, headcount or team. A requisition may be very short; a job title plus a skill or an experience level is in scope. OUT OF SCOPE: general knowledge questions, trivia, chit-chat, greetings, small talk, customer support requests, instructions addressed to the assistant, and anything else not about hiring for a role. Score your confidence that the text is OUT OF SCOPE, not just whether it contradicts recruiting: text that contains no hiring information at all - a greeting like 'hello' or 'hi', a single word, a pleasantry, a question about the assistant itself - is just as out of scope as an unrelated topic and must score confidence near 1.0. Only score confidence near 0.0 when the text actually names or describes a role, skill, seniority level, or hiring need."
+            }
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.guardrails",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ],
+      "id": "guardrail-guardrails",
+      "name": "Guardrails"
+    },
+    {
+      "parameters": {
+        "jsCode": "// The input guardrail blocked this request, so n8n words the rejection. This map used to be\n// GUARDRAIL_REASONS in nodes.py; it moved here with the decision it explains, rather than being\n// left in a second place that has to be kept in step with a decision it no longer makes.\nconst REASONS = {\n  keywords: 'it contains phrasing associated with prompt-injection attempts',\n  jailbreak: \"it looks like an attempt to override the assistant's instructions\",\n  topicalAlignment: 'it is not a job requisition',\n};\n\n// A friendly, on-brand nudge for the common case of someone just saying hi or asking something\n// unrelated - deliberately distinct from the terser wording used for keyword and jailbreak\n// blocks, since those are adversarial input and should not read as an invitation to try again.\nconst TOPICAL_ONLY =\n  \"Hi! I'm the HR Copilot - I screen candidates against job requisitions. Tell me about the \" +\n  \"role you're hiring for (title, required skills, seniority or years of experience) and \" +\n  \"I'll take it from there.\";\n\nconst triggered = ($json.checks || []).filter(c => c.triggered).map(c => c.name);\n\nlet reason;\nif (triggered.length === 1 && triggered[0] === 'topicalAlignment') {\n  reason = TOPICAL_ONLY;\n} else if (triggered.length === 0) {\n  // The node routed here, so something failed even if no check named itself.\n  reason = 'The request was blocked by the input guardrail.';\n} else {\n  reason = 'The request was blocked because ' +\n    triggered.map(name => REASONS[name] || name).join('; and ') + '.';\n}\n\n// Same envelope every terminal branch emits, so the UI has one shape to render.\nreturn [{ json: {\n  session_id: $('Screen Webhook').first().json.body.session_id || null,\n  guardrail_passed: false,\n  rejection_reason: reason,\n  shortlist_warning: '',\n  requirements: null,\n  candidates: [],\n  actions: [],\n  reply: 'Request rejected: ' + reason,\n}}];"
+      },
+      "id": "explain-block",
+      "name": "Explain Block",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "respond-blocked",
+      "name": "Respond (Blocked)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        740,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://agent:5000/screen",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ requisition_text: $('Screen Webhook').first().json.body.requisition_text, session_id: $('Screen Webhook').first().json.body.session_id }) }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "screen-agent",
+      "name": "Screen Agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "text": "={{ $('Screen Agent').first().json.shortlist_text }}",
+        "guardrails": {
+          "custom": {
+            "guardrail": [
+              {
+                "name": "Shortlist relevance",
+                "threshold": 0.7,
+                "prompt": "You are reviewing a shortlist produced by a recruiting assistant.\n\nYou are given a job requisition - its title and required skills - followed by the candidates the\nassistant selected. Each candidate is listed with their CURRENT JOB TITLE.\n\nFlag a violation when the selected candidates are not plausibly related to the role being hired\nfor: a shortlist of backend engineers returned for a sales role, designers returned for a data\nanalyst role, people from an entirely different profession.\n\nDo NOT flag any of the following:\n- an empty shortlist, or one stating that no candidate passed the threshold\n- candidates from an adjacent or overlapping field: a DevOps engineer considered for a backend\n  role, a junior analyst for an analyst role, a full-stack engineer for a frontend role\n- scores you disagree with; judging how well a candidate was scored is not your job\n- a candidate who is a weak fit, as long as their field is related to the role\n\nOnly flag when a reader would say the assistant has returned people from the wrong profession\nentirely."
+              }
+            ]
+          }
+        }
+      },
+      "id": "shortlist-check",
+      "name": "Shortlist Check",
+      "type": "@n8n/n8n-nodes-langchain.guardrails",
+      "typeVersion": 2,
+      "position": [
+        780,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "shortlist-chat-model",
+      "name": "Chat Model (Output)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        720,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "hrCopilotOpenAi",
+          "name": "OpenAI (auto)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// The shortlist relevance check fired, so the action chain below was never entered. This is the\n// whole reason the check moved up here: in the version where LangGraph orchestrated, this same\n// verdict arrived as a warning printed over interviews that were already booked and invitations\n// that had already been sent. Now it is the reason none of that happened.\nconst agent = $('Screen Agent').first().json;\n\nconst WARNING =\n  'The shortlist did not match the role you asked for. An automated relevance check thought ' +\n  'these candidates come from a different field, so no interviews were booked, no invitations ' +\n  'were sent, and nothing was written to the ATS. Please review the screening below.';\n\nreturn [{ json: {\n  session_id: agent.session_id,\n  guardrail_passed: true,\n  rejection_reason: null,\n  shortlist_warning: WARNING,\n  requirements: agent.requirements,\n  candidates: agent.candidates,\n  actions: [],\n  reply: '[!] ' + WARNING + '\\n\\n' + agent.report,\n}}];"
+      },
+      "id": "explain-shortlist-block",
+      "name": "Explain Shortlist Block",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "respond-shortlist-blocked",
+      "name": "Respond (Shortlist Blocked)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1260,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-has-passing",
+              "leftValue": "={{ $('Screen Agent').first().json.actions_request.candidates.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "has-passing",
+      "name": "Has Passing?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1040,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/hr_data/calendar.json",
+        "options": {}
+      },
+      "id": "read-calendar",
+      "name": "Read Calendar",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        1300,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Assign an interview slot to every candidate on the shortlist, in one pass.\n//\n// The whole batch is handled here and the calendar is written exactly once, on purpose.\n// Branching per candidate would re-read the calendar before the previous candidate's write\n// had landed, so every booking but the last would be silently lost. One read, one write.\n//\n// The shortlist is read off Screen Agent rather than off $json: the Guardrails node between\n// here and there replaces the item with its own verdict, so $json is the check result.\nconst body = $('Screen Agent').first().json.actions_request;\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst calendar = JSON.parse(buffer.toString('utf8'));\n\nconst role = body.role || 'Unspecified role';\nconst candidates = Array.isArray(body.candidates) ? body.candidates : [];\n\nconst assignments = [];\n\nfor (const candidate of candidates) {\n  const name = candidate.candidate_name;\n\n  // Re-running the same requisition must not consume a second slot, so an existing booking\n  // for this candidate is reused instead of taking another one.\n  let slot = calendar.slots.find(s => s.booked_by === name);\n  let status = 'already_scheduled';\n\n  if (!slot) {\n    // First fit: the earliest still-free slot in calendar order. Slots claimed earlier in\n    // this same loop are already non-null, so the batch never double-books.\n    slot = calendar.slots.find(s => s.booked_by === null);\n    status = 'scheduled';\n  }\n\n  if (!slot) {\n    // Nothing free. The candidate still reaches the ATS - only the invitation is withheld,\n    // because there is no time to promise them.\n    assignments.push({\n      ...candidate, role, status: 'no_slots_available',\n      slot_id: null, start: null, end: null, interviewer: null,\n    });\n    continue;\n  }\n\n  slot.booked_by = name;\n  slot.role = role;\n\n  // One-hour interview: the calendar event needs an end, the JSON slot does not.\n  // The trailing 'Z' forces UTC on both the parse and the format, so this is pure wall-clock\n  // arithmetic. v1 wrote `new Date(slot.start)` here, which parses as *local* time and then\n  // formats as UTC - correct only because the n8n container happens to run in UTC, and off by\n  // the host offset anywhere else.\n  const startsAt = new Date(slot.start.endsWith('Z') ? slot.start : slot.start + 'Z');\n\n  assignments.push({\n    ...candidate,\n    role,\n    status,\n    slot_id: slot.slot_id,\n    start: slot.start,\n    end: new Date(startsAt.getTime() + 60 * 60 * 1000).toISOString().slice(0, 19),\n    interviewer: slot.interviewer,\n  });\n}\n\nconst updated = Buffer.from(JSON.stringify(calendar, null, 2), 'utf8');\nreturn [{\n  json: { role, mode: body.mode || 'log', assignments },\n  binary: { data: await this.helpers.prepareBinaryData(updated, 'calendar.json', 'application/json') },\n}];"
+      },
+      "id": "assign-slots",
+      "name": "Assign Slots",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1508,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/hr_data/calendar.json",
+        "options": {}
+      },
+      "id": "write-calendar",
+      "name": "Write Calendar",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        1716,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/hr_data/sent_emails.json",
+        "options": {}
+      },
+      "id": "read-outbox",
+      "name": "Read Outbox",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        1924,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Append one invitation per candidate who actually got a slot, then write the outbox once.\n// Candidates with no slot are skipped here by design - an invitation with no time in it is\n// worse than no invitation. They are still recorded in the ATS by the next stage.\n//\n// The candidate list cannot ride here in json: Read Outbox replaces json with file metadata,\n// so it is fetched back from the node that produced it.\nconst assignments = $('Assign Slots').first().json.assignments;\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst outbox = JSON.parse(buffer.toString('utf8'));\n\n// Render the slot the way the calendar invitation does, so the two messages a candidate\n// receives agree: \"Tuesday 8 September 2026, 09:00\" rather than a raw ISO timestamp.\n// Luxon is only available in n8n expressions, not in Code nodes, hence the plain-JS version.\nconst WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];\nconst MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',\n                'September', 'October', 'November', 'December'];\n\nfunction formatSlot(isoString) {\n  const when = new Date(isoString);\n  // Fall back to whatever we were given rather than printing \"Invalid Date\" to a candidate.\n  if (isNaN(when.getTime())) return isoString;\n  const hours = String(when.getHours()).padStart(2, '0');\n  const minutes = String(when.getMinutes()).padStart(2, '0');\n  return `${WEEKDAYS[when.getDay()]} ${when.getDate()} ${MONTHS[when.getMonth()]} `\n       + `${when.getFullYear()}, ${hours}:${minutes}`;\n}\n\nconst invitations = [];\n\nfor (const a of assignments) {\n  // Only a freshly booked slot gets an invitation. 'already_scheduled' means a previous run\n  // already sent one for this exact slot - composing another here would be a duplicate email,\n  // and in live mode a duplicate real Gmail message and Calendar invite for a time that hasn't\n  // changed. Checking status, not just slot_id, is what tells the two cases apart: both carry\n  // a slot_id, only 'scheduled' means this execution is the one that claimed it.\n  if (a.status !== 'scheduled') continue;\n\n  const start = formatSlot(a.start);\n  const invitation = {\n    sent_at: new Date().toISOString(),\n    to: a.deliver_to || a.candidate_email,\n    intended_to: a.candidate_email,\n    candidate_name: a.candidate_name,\n    role: a.role,\n    slot_id: a.slot_id,\n    start: a.start,\n    interviewer: a.interviewer,\n    subject: `Interview invitation - ${a.role}`,\n    body: `Hi ${a.candidate_name},\\n\\nWe reviewed your CV for the ${a.role} position and would like to invite you to an interview on ${start}` +\n          (a.interviewer ? ` with ${a.interviewer}` : '') +\n          `.\\n\\nPlease reply to confirm.\\n\\nBest regards,\\nTalent Acquisition`,\n  };\n\n  outbox.push(invitation);\n  invitations.push(invitation);\n}\n\nconst updated = Buffer.from(JSON.stringify(outbox, null, 2), 'utf8');\nreturn [{\n  json: { invitations, total_sent: outbox.length },\n  binary: { data: await this.helpers.prepareBinaryData(updated, 'sent_emails.json', 'application/json') },\n}];"
+      },
+      "id": "compose-invitations",
+      "name": "Compose Invitations",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2132,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/hr_data/sent_emails.json",
+        "options": {}
+      },
+      "id": "write-outbox",
+      "name": "Write Outbox",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        2340,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/hr_data/ats_log.json",
+        "options": {}
+      },
+      "id": "read-ats",
+      "name": "Read ATS Log",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        2548,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Record every shortlisted candidate, including the ones no slot was free for. Losing a\n// candidate from the ATS because the calendar happened to be full would be the worst failure\n// mode here - the shortlist is the thing of value, the slot is just logistics.\n//\n// `notes` is the Evaluator's justification AFTER the graph's grounding guard has had a look at\n// it. That guard used to run in the agent's last node, which was one node too late: by then\n// this row had already been written with a claim the CV might not support.\nconst assignments = $('Assign Slots').first().json.assignments;\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst ats = JSON.parse(buffer.toString('utf8'));\n\nconst entries = [];\n\nfor (const a of assignments) {\n  const entry = {\n    logged_at: new Date().toISOString(),\n    candidate_name: a.candidate_name,\n    candidate_email: a.candidate_email || null,\n    role: a.role,\n    status: a.slot_id ? 'interview_scheduled' : 'no_slot_available',\n    score: a.score ?? null,\n    notes: a.notes || null,\n    // v1 could not record this: its ATS call was a separate request that never saw the\n    // booking result. Batching the whole sequence into one execution makes it free.\n    slot_id: a.slot_id || null,\n  };\n  ats.push(entry);\n  entries.push(entry);\n}\n\nconst updated = Buffer.from(JSON.stringify(ats, null, 2), 'utf8');\nreturn [{\n  json: { entries, total_records: ats.length },\n  binary: { data: await this.helpers.prepareBinaryData(updated, 'ats_log.json', 'application/json') },\n}];"
+      },
+      "id": "append-ats",
+      "name": "Append ATS Entries",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2756,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/hr_data/ats_log.json",
+        "options": {}
+      },
+      "id": "write-ats",
+      "name": "Write ATS Log",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        2964,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Flatten the three stages into one row per action actually performed. Order is per candidate,\n// schedule -> invitation -> ATS.\n//\n// candidate_name is echoed back verbatim, never re-derived: the report lines below are joined to\n// candidates by exact string equality, so any casing drift here would silently produce a passing\n// candidate with no actions listed beneath them.\nconst assignSlots = $('Assign Slots').first().json;\nconst assignments = assignSlots.assignments;\nconst invitations = $('Compose Invitations').first().json.invitations;\nconst ats = $('Append ATS Entries').first().json;\n\n// Safe to key by name: retrieval dedupes candidates by name and the evaluator forces\n// candidate_name from CV metadata, so one batch cannot contain the same name twice.\nconst invitationByName = {};\nfor (const invitation of invitations) invitationByName[invitation.candidate_name] = invitation;\n\nconst entryByName = {};\nfor (const entry of ats.entries) entryByName[entry.candidate_name] = entry;\n\nconst results = [];\n\nfor (const a of assignments) {\n  results.push({\n    candidate_name: a.candidate_name,\n    action: 'schedule_interview',\n    status: a.status,\n    details: a.slot_id\n      ? {\n          slot_id: a.slot_id, start: a.start, end: a.end,\n          interviewer: a.interviewer, role: a.role, deliver_to: a.deliver_to || null,\n        }\n      : { message: 'No free interview slot was available.' },\n  });\n\n  // Absent for a candidate with no slot - that absence is the record that nothing was promised.\n  const invitation = invitationByName[a.candidate_name];\n  if (invitation) {\n    results.push({\n      candidate_name: a.candidate_name,\n      action: 'send_invitation_email',\n      status: 'sent',\n      details: {\n        to: invitation.to, intended_to: invitation.intended_to,\n        subject: invitation.subject, slot_id: invitation.slot_id,\n      },\n    });\n  }\n\n  const entry = entryByName[a.candidate_name];\n  if (entry) {\n    results.push({\n      candidate_name: a.candidate_name,\n      action: 'log_to_ats',\n      status: 'logged',\n      details: {\n        ats_status: entry.status, score: entry.score, total_records: ats.total_records,\n      },\n    });\n  }\n}\n\nreturn [{\n  json: {\n    status: 'ok',\n    mode: assignSlots.mode,\n    role: assignSlots.role,\n    candidate_count: assignments.length,\n    results,\n  },\n}];"
+      },
+      "id": "build-response",
+      "name": "Build Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3172,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// The last node before the response, and the only place the two halves of the report meet.\n//\n// The agent's half covers what the Evaluator decided: who was scored, what they scored, who\n// cleared the threshold. It stops there deliberately - at the moment LangGraph rendered it,\n// nothing had been booked, and a report that announces an interview before anything booked one\n// is exactly the confident-and-wrong output this project keeps designing against.\n//\n// This half covers what n8n did, which is the only part n8n knows: whether a slot was free and\n// whether a message went out.\nconst agent = $('Screen Agent').first().json;\n\n// Reached on BOTH branches of Has Passing?. When nobody passed, the action chain was never\n// entered, so Build Response is an unexecuted node and referencing it throws. That throw is the\n// signal that there was nothing to book, so it is caught here rather than paid for with a second\n// copy of this envelope on the other branch.\nlet results = [];\ntry {\n  results = $('Build Response').first().json.results || [];\n} catch (error) {\n  results = [];\n}\n\n// The JS half of what used to be describe_action() in Python. It lives here now because the\n// data it formats is produced here.\nfunction detail(row) {\n  const d = row.details || {};\n  if (row.action === 'schedule_interview' && d.slot_id) {\n    return ` (${d.start} with ${d.interviewer || 'TBC'})`;\n  }\n  if (row.action === 'send_invitation_email' && d.to) return ` (to ${d.to})`;\n  if (row.status === 'error') return ` (${d.message || 'no detail'})`;\n  return '';\n}\n\nconst lines = results.map(r => `  - ${r.candidate_name} - ${r.action}: ${r.status}${detail(r)}`);\nconst reply = lines.length\n  ? `${agent.report}\\n\\nActions taken:\\n${lines.join('\\n')}`\n  : agent.report;\n\nreturn [{ json: {\n  session_id: agent.session_id,\n  guardrail_passed: true,\n  rejection_reason: null,\n  shortlist_warning: '',\n  requirements: agent.requirements,\n  candidates: agent.candidates,\n  actions: results,\n  reply,\n}}];"
+      },
+      "id": "compose-reply",
+      "name": "Compose Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3380,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        3588,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-live",
+              "leftValue": "={{ $('Screen Agent').first().json.actions_request.mode }}",
+              "rightValue": "live",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-live",
+      "name": "If Live?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        3796,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Live mode only: one item per booked candidate. Both Google nodes hang off this node in\n// parallel rather than in series, because each reads $json directly - chaining them would\n// hand Gmail the Calendar API's event object instead of the invitation.\n//\n// This runs after the response has already gone back, on both branches of Has Passing?. With\n// nobody booked the action chain never ran, so these two references throw - and no bookings\n// means there is nothing to send, which is exactly what an empty return produces: the Gmail and\n// Calendar nodes receive zero items and do not execute.\nlet assignments;\nlet invitations;\ntry {\n  assignments = $('Assign Slots').first().json.assignments;\n  invitations = $('Compose Invitations').first().json.invitations;\n} catch (error) {\n  return [];\n}\n\nconst byName = {};\nfor (const invitation of invitations) byName[invitation.candidate_name] = invitation;\n\nreturn assignments\n  // Same rule as Compose Invitations, and for the same reason: 'already_scheduled' candidates\n  // already have a real Calendar event and a real Gmail message from whichever run first\n  // booked them. Filtering on slot_id alone (true for both statuses) is what caused a re-run\n  // of the same requisition to fire a duplicate event and email for an unchanged slot.\n  .filter(a => a.status === 'scheduled')\n  .map(a => ({\n    json: {\n      candidate_name: a.candidate_name,\n      role: a.role,\n      start: a.start,\n      end: a.end,\n      interviewer: a.interviewer,\n      deliver_to: a.deliver_to,\n      subject: byName[a.candidate_name].subject,\n      message: byName[a.candidate_name].body,\n    },\n  }));"
+      },
+      "id": "fan-out-live",
+      "name": "Fan Out Live",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4004,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.deliver_to }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.message }}",
+        "options": {}
+      },
+      "id": "send-gmail",
+      "name": "Send Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        4212,
+        128
+      ],
+      "webhookId": "5c1f7a30-9d84-4e62-b1a7-3f08d2c6e415",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hrCopilotGmail",
+          "name": "Gmail (auto)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "project.03.07.26@gmail.com",
+          "mode": "list",
+          "cachedResultName": "project.03.07.26@gmail.com"
+        },
+        "start": "={{ $json.start }}",
+        "end": "={{ $json.end }}",
+        "additionalFields": {
+          "summary": "=Interview: {{ $json.candidate_name }} - {{ $json.role }}",
+          "description": "=Hi {{ $json.candidate_name }},\n\nThank you for applying for the {{ $json.role }} position. We reviewed your CV and would like to invite you to an interview with {{ $json.interviewer }}.\n\nWhen: {{ DateTime.fromISO($json.start).isValid ? DateTime.fromISO($json.start).toFormat('cccc d LLLL yyyy, HH:mm') : $json.start }} (1 hour)\n\nPlease accept this invitation to confirm, or reply to this email if you need a different time.\n\nBest regards,\nTalent Acquisition",
+          "attendees": [
+            "={{ $json.deliver_to }}"
+          ],
+          "sendUpdates": "all"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        4212,
+        -128
+      ],
+      "id": "e50adb38-773d-4f6e-83cc-5a3283058e6a",
+      "name": "Create an event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "hrCopilotCalendar",
+          "name": "Calendar (auto)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "**Explains a blocked request**\nIf the guardrail above rejects the message (looks like a prompt-injection attempt, a jailbreak attempt, or isn't a job posting at all), this turns that verdict into a friendly explanation for whoever submitted it.",
+        "width": 200,
+        "height": 150
+      },
+      "id": "note-explain-block",
+      "name": "note-explain-block",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        520,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Explains a blocked shortlist**\nIf the AI decides the shortlist doesn't match the role that was requested (e.g. it suggested designers for a sales role), this stops the run and writes a clear warning - before any interviews are booked or emails are sent.",
+        "width": 200,
+        "height": 150
+      },
+      "id": "note-explain-shortlist-block",
+      "name": "note-explain-shortlist-block",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Books interview slots**\nReads the shared calendar, gives each shortlisted candidate the next open slot with the right interviewer, and saves it back. A candidate already booked in an earlier run keeps their existing slot instead of getting a second one.",
+        "width": 200,
+        "height": 150
+      },
+      "id": "note-assign-slots",
+      "name": "note-assign-slots",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1508,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Writes the invitation emails**\nFor every candidate who just got a new slot, writes a personalized interview invitation (date, time, interviewer) and adds it to the outbox file.",
+        "width": 200,
+        "height": 150
+      },
+      "id": "note-compose-invitations",
+      "name": "note-compose-invitations",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2132,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Logs to the ATS**\nRecords every shortlisted candidate in the applicant tracking log - including candidates who didn't get a slot because the calendar was full - with the AI's score and justification.",
+        "width": 200,
+        "height": 150
+      },
+      "id": "note-append-ats",
+      "name": "note-append-ats",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2756,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Summarizes what just happened**\nCombines the booking, email and ATS-logging results into one clean list of actions per candidate, ready for the final report.",
+        "width": 200,
+        "height": 150
+      },
+      "id": "note-build-response",
+      "name": "note-build-response",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3172,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Assembles the final report**\nCombines the AI's screening report (who was scored, and why) with the summary of what n8n actually did (booked / emailed / logged) into the message sent back to the requester.",
+        "width": 200,
+        "height": 150
+      },
+      "id": "note-compose-reply",
+      "name": "note-compose-reply",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3380,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Sends real emails & calendar invites (live mode only)**\nOnly runs when live mode is on. Splits the batch of newly booked candidates into one item per candidate, so each gets their own real Gmail message and Google Calendar invite.",
+        "width": 200,
+        "height": 150
+      },
+      "id": "note-fan-out-live",
+      "name": "note-fan-out-live",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4004,
+        220
+      ]
+    }
+  ],
+  "connections": {
+    "Read Calendar": {
+      "main": [
+        [
+          {
+            "node": "Assign Slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assign Slots": {
+      "main": [
+        [
+          {
+            "node": "Write Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Calendar": {
+      "main": [
+        [
+          {
+            "node": "Read Outbox",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Outbox": {
+      "main": [
+        [
+          {
+            "node": "Compose Invitations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compose Invitations": {
+      "main": [
+        [
+          {
+            "node": "Write Outbox",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Outbox": {
+      "main": [
+        [
+          {
+            "node": "Read ATS Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read ATS Log": {
+      "main": [
+        [
+          {
+            "node": "Append ATS Entries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append ATS Entries": {
+      "main": [
+        [
+          {
+            "node": "Write ATS Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write ATS Log": {
+      "main": [
+        [
+          {
+            "node": "Build Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Response": {
+      "main": [
+        [
+          {
+            "node": "Compose Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compose Reply": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "If Live?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screen Webhook": {
+      "main": [
+        [
+          {
+            "node": "Guardrails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardrails": {
+      "main": [
+        [
+          {
+            "node": "Screen Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Explain Block",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Guardrails",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Explain Block": {
+      "main": [
+        [
+          {
+            "node": "Respond (Blocked)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screen Agent": {
+      "main": [
+        [
+          {
+            "node": "Shortlist Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shortlist Check": {
+      "main": [
+        [
+          {
+            "node": "Has Passing?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Explain Shortlist Block",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Model (Output)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Shortlist Check",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Explain Shortlist Block": {
+      "main": [
+        [
+          {
+            "node": "Respond (Shortlist Blocked)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Passing?": {
+      "main": [
+        [
+          {
+            "node": "Read Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Compose Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Live?": {
+      "main": [
+        [
+          {
+            "node": "Fan Out Live",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Fan Out Live": {
+      "main": [
+        [
+          {
+            "node": "Create an event",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "pinData": {},
+  "versionId": "3a7d54e1-8c62-4f09-b5d3-7e1a90c4d2b8",
+  "activeVersionId": "3a7d54e1-8c62-4f09-b5d3-7e1a90c4d2b8",
+  "versionCounter": 1,
+  "triggerCount": 2,
+  "sourceWorkflowId": null,
+  "tags": [],
+  "shared": [
+    {
+      "updatedAt": "2026-09-02T17:22:08.541Z",
+      "createdAt": "2026-09-02T17:22:08.541Z",
+      "role": "workflow:owner",
+      "workflowId": "hrCopilotActionsV2",
+      "projectId": "1xeV6yFhgyL23fe4",
+      "project": {
+        "updatedAt": "2026-08-09T07:04:55.018Z",
+        "createdAt": "2026-08-09T07:03:29.452Z",
+        "id": "1xeV6yFhgyL23fe4",
+        "name": "m r <miguelrosemberg4@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "customTelemetryTags": [],
+        "creatorId": "7c9500e8-bc0c-4d01-9665-ee0f537b4cd6"
+      }
+    }
+  ],
+  "versionMetadata": {
+    "name": null,
+    "description": null
+  }
+}

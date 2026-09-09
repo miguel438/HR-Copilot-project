@@ -1,0 +1,195 @@
+# HR Copilot - full stack: n8n, the Flask agent, and the Streamlit UI. The vector store is
+# Qdrant Cloud (QDRANT_URL/QDRANT_API_KEY in .env), not a container here.
+#
+# Bring it up:
+#   docker compose up --build -d
+#
+# Requires a .env file (copy .env.example) with your OPENAI_API_KEY, QDRANT_URL and
+# QDRANT_API_KEY.
+#
+# The explicit project name below is what Docker Compose uses to namespace this stack's named
+# volumes, so a folder rename can't accidentally point it at a different project's data.
+name: hrcopilot-v2
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # n8n: the orchestrator. One webhook drives the whole system - it runs the input guardrail,
+  # calls the agent's /screen endpoint, runs the shortlist guardrail on what comes back, and
+  # only then performs the calendar, mail and ATS actions.
+  #
+  # n8n-import provisions credentials AND loads AND publishes the workflow
+  # before n8n's own process ever starts - all plain CLI commands that work
+  # standalone against the database file, no running server needed. This
+  # matters for two reasons found directly while building this:
+  #
+  # 1. A *running* n8n only registers a workflow's webhook when its own
+  #    process starts, not when a workflow is published while already
+  #    running (publishing over the REST API returns 200 immediately, but
+  #    the webhook keeps 404ing until the process restarts). n8n also caches
+  #    the published workflow definition at boot - a live REST edit to a
+  #    node's data (e.g. its credential reference) does not reach a running
+  #    webhook execution either, for the same reason. Both need the same
+  #    fix: do it before the process starts, not after.
+  # 2. The exported workflow references credential IDs from whoever built
+  #    it - meaningless on anyone else's fresh n8n. Exports never include
+  #    credential secrets (that's why sharing this file is safe), so this
+  #    step creates fresh credentials locally, under fixed IDs the workflow's
+  #    nodes are wired to reference, using only the OPENAI_API_KEY already
+  #    in your .env - no new secret to provide.
+  #
+  # Gmail/Calendar get placeholder credentials by default so the nodes resolve
+  # at all (enough for ACTION_MODE=log). If a .env supplies GMAIL_CLIENT_ID /
+  # CALENDAR_CLIENT_ID etc. - real OAuth data exported from an already-
+  # authorized n8n instance, delivered separately from the project ZIP since
+  # it's a live secret, never committed - those get baked in instead, so
+  # ACTION_MODE=live works with zero manual OAuth steps. See README.
+  # ---------------------------------------------------------------------------
+  # !! Never let this service re-run while n8n is already up. `docker compose up -d agent`
+  # !! does exactly that: agent depends on n8n, n8n depends on this, and compose happily
+  # !! re-runs a completed one-shot dependency. It then logs "Deactivating workflow ..." and
+  # !! "Changes will not take effect if n8n is running", and the webhook is deregistered -
+  # !! every container still reports healthy, and every POST 404s. Observed, not theoretical.
+  # !!
+  # !! To restart one service, skip the dependency chain:
+  # !!     docker compose up -d --no-deps --build agent
+  # !! To change the workflow, restart everything:
+  # !!     docker compose down && docker compose up -d
+  n8n-import:
+    image: docker.n8n.io/n8nio/n8n:2.34.6
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/hr-copilot-v2-workflow.json:/workflows/hr-copilot-v2-workflow.json:ro
+    entrypoint: ["sh", "-c"]
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GMAIL_CLIENT_ID=${GMAIL_CLIENT_ID:-}
+      - GMAIL_CLIENT_SECRET=${GMAIL_CLIENT_SECRET:-}
+      - GMAIL_OAUTH_TOKEN_DATA_B64=${GMAIL_OAUTH_TOKEN_DATA_B64:-}
+      - CALENDAR_CLIENT_ID=${CALENDAR_CLIENT_ID:-}
+      - CALENDAR_CLIENT_SECRET=${CALENDAR_CLIENT_SECRET:-}
+      - CALENDAR_OAUTH_TOKEN_DATA_B64=${CALENDAR_OAUTH_TOKEN_DATA_B64:-}
+    command:
+      - |
+        GMAIL_TOKEN_JSON=$$(echo "$${GMAIL_OAUTH_TOKEN_DATA_B64:-e30=}" | base64 -d)
+        CALENDAR_TOKEN_JSON=$$(echo "$${CALENDAR_OAUTH_TOKEN_DATA_B64:-e30=}" | base64 -d)
+        cat > /tmp/credentials.json <<EOF
+        [
+          {"id": "hrCopilotOpenAi", "name": "OpenAI (auto)", "type": "openAiApi",
+           "data": {"apiKey": "$$OPENAI_API_KEY"}},
+          {"id": "hrCopilotGmail", "name": "Gmail (auto - replace for live mode)", "type": "gmailOAuth2",
+           "data": {"clientId": "$${GMAIL_CLIENT_ID:-placeholder}", "clientSecret": "$${GMAIL_CLIENT_SECRET:-placeholder}", "oauthTokenData": $$GMAIL_TOKEN_JSON}},
+          {"id": "hrCopilotCalendar", "name": "Calendar (auto - replace for live mode)", "type": "googleCalendarOAuth2Api",
+           "data": {"clientId": "$${CALENDAR_CLIENT_ID:-placeholder}", "clientSecret": "$${CALENDAR_CLIENT_SECRET:-placeholder}", "oauthTokenData": $$CALENDAR_TOKEN_JSON}}
+        ]
+        EOF
+        n8n import:credentials --input=/tmp/credentials.json
+        n8n import:workflow --input=/workflows/hr-copilot-v2-workflow.json
+        n8n publish:workflow --id=hrCopilotActionsV2
+    networks:
+      - hr-copilot-network
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.34.6
+    restart: unless-stopped
+    depends_on:
+      n8n-import:
+        condition: service_completed_successfully
+    ports:
+      - "${N8N_PORT:-5679}:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      # The interview calendar, email log and ATS log the candidate-action workflow reads/writes.
+      - ./n8n_data:/hr_data
+    environment:
+      - N8N_RESTRICT_FILE_ACCESS_TO=/hr_data
+      # n8n builds its OAuth2 redirect_uri from its own idea of its address, which defaults to
+      # the container-internal port (5678) - not the host port this is published on. Without
+      # this, the OAuth callback sends Google to http://localhost:5678/..., which the browser
+      # can't reach, instead of the host-published http://localhost:5679/... from the README.
+      - WEBHOOK_URL=http://localhost:${N8N_PORT:-5679}/
+    networks:
+      - hr-copilot-network
+
+  # ---------------------------------------------------------------------------
+  # ingest: one-off job that chunks and embeds data/resumes/*.pdf into Qdrant Cloud.
+  # ---------------------------------------------------------------------------
+  ingest:
+    build: .
+    command: ["python", "src/ingest.py", "--reset"]
+    volumes:
+      # Same host directory the agent's /candidates upload endpoint writes into, so --reset
+      # re-embeds previously uploaded CVs too, not just the 10 seed resumes baked into the image.
+      - ./data/resumes:/app/data/resumes
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - QDRANT_URL=${QDRANT_URL}
+      - QDRANT_API_KEY=${QDRANT_API_KEY}
+    networks:
+      - hr-copilot-network
+
+  # ---------------------------------------------------------------------------
+  # agent: the Flask API in front of the LangGraph flow (POST /screen, GET /health).
+  #
+  # n8n calls this, not the other way round. /screen has no side effects - it reads Qdrant and
+  # spends LLM calls, and books, sends and writes nothing - so the only route to Gmail, Google
+  # Calendar or the ATS starts at n8n's guarded webhook.
+  # ---------------------------------------------------------------------------
+  agent:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      ingest:
+        condition: service_completed_successfully
+      n8n:
+        condition: service_started
+    ports:
+      - "${AGENT_PORT:-5001}:5000"
+    volumes:
+      # POST /candidates saves uploaded CVs here, so they survive a rebuild instead of
+      # vanishing with the container (data/ is otherwise only baked in at image build time).
+      - ./data/resumes:/app/data/resumes
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - QDRANT_URL=${QDRANT_URL}
+      - QDRANT_API_KEY=${QDRANT_API_KEY}
+      # Only the deep health check uses this - the agent never posts to n8n. n8n calls the
+      # agent, at http://agent:5000/screen, which is hardcoded in the workflow generator.
+      - N8N_SCREEN_URL=http://n8n:5678/webhook/screen
+      # "log" needs no Google credentials - the default a reviewer gets with zero extra setup.
+      # Switch to "live" only once Gmail/Calendar OAuth credentials exist inside n8n (see README).
+      - ACTION_MODE=${ACTION_MODE:-log}
+      # Exposed so the shortlist guardrail can actually be demonstrated. Dropping the threshold
+      # lets candidates from the wrong job family onto the shortlist, which is the only way to
+      # make the relevance check fire without hand-editing a payload - see docs/demo_script.md.
+      - SCORE_THRESHOLD=${SCORE_THRESHOLD:-7}
+    networks:
+      - hr-copilot-network
+
+  # ---------------------------------------------------------------------------
+  # ui: the bonus Streamlit front end (spec §4.5).
+  #
+  # Screening requests go to n8n, because n8n is the orchestrator; only the health check talks
+  # to the agent directly. The two addresses below are the shortest statement of who runs what.
+  # ---------------------------------------------------------------------------
+  ui:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - agent
+    command: ["streamlit", "run", "src/streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501"]
+    ports:
+      - "${UI_PORT:-8502}:8501"
+    environment:
+      - HR_COPILOT_N8N_URL=http://n8n:5678/webhook/screen
+      - HR_COPILOT_API_URL=http://agent:5000
+    networks:
+      - hr-copilot-network
+
+
+networks:
+  hr-copilot-network:
+    driver: bridge
+
+volumes:
+  n8n_data:

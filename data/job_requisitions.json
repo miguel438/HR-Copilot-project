@@ -1,0 +1,29 @@
+[
+  {
+    "id": "req-001",
+    "title": "Senior Backend Engineer",
+    "description": "We are hiring a Senior Backend Engineer to own core Python services running on AWS. Requires strong Python experience, hands-on AWS infrastructure work, and experience with distributed/microservices systems.",
+    "required_skills": ["Python", "AWS"],
+    "min_years_experience": 5,
+    "headcount": 1,
+    "expected_result": "strong match — Alice Chen should score highest; James Anderson is a plausible near-miss (right seniority, wrong stack: Java/Azure not Python/AWS)"
+  },
+  {
+    "id": "req-002",
+    "title": "Maritime Logistics Captain",
+    "description": "Seeking a licensed ship captain to manage maritime freight logistics routes, crew scheduling, and port compliance for our shipping fleet.",
+    "required_skills": ["maritime navigation", "freight logistics", "crew management"],
+    "min_years_experience": 5,
+    "headcount": 1,
+    "expected_result": "no match — none of the seeded resumes are relevant to this role"
+  },
+  {
+    "id": "req-003",
+    "title": "Data Analyst",
+    "description": "Looking for a Data Analyst to build SQL-based reporting and dashboards for the operations team, with Python/pandas as a plus.",
+    "required_skills": ["SQL"],
+    "min_years_experience": 2,
+    "headcount": 2,
+    "expected_result": "multiple matches — Maya Levi (strong) and Noah Kim (junior but plausible) should both retrieve; useful for testing multi-candidate scoring/threshold behavior"
+  }
+]

@@ -1,0 +1,2 @@
+For Noa: "We're hiring a Senior Security Engineer with at least 5 years of experience in penetration testing, SIEM tools, and AWS security. Incident response experience is a plus."
+For Ethan: "Looking for a Mobile Engineer with at least 3 years of iOS experience in Swift and SwiftUI, familiar with Firebase and CI/CD pipelines."

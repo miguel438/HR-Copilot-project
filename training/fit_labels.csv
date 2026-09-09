@@ -1,0 +1,295 @@
+req_id,req_title,min_years,candidate_name,candidate_role,candidate_years,matched_skills,required_skills,suggested_band,band,llm_score,skill_overlap,years_surplus,years_shortfall,title_overlap,similarity,note,source
+req-t01-backend-senior,Senior Backend Engineer,5,Alice Chen,Senior Backend Engineer,6,Python; AWS; distributed systems; microservices,Python; AWS; distributed systems; microservices,2,2,10,1,0.25,0,1,0.5237,,original
+req-t01-backend-senior,Senior Backend Engineer,5,Marcus Webb,Backend Engineer,4,Python; AWS,Python; AWS; distributed systems; microservices,1,1,5.0,0.5,0.0,0.25,1.0,0.5376,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Ryan Patel,Senior DevOps Engineer,7,Python; AWS; microservices,Python; AWS; distributed systems; microservices,1,1,5,0.75,0.5,0,0.3333333333333333,0.4169,,original
+req-t01-backend-senior,Senior Backend Engineer,5,Daniel Cohen,Backend Engineer,3,Python; AWS,Python; AWS; distributed systems; microservices,0,0,3,0.5,0,0.5,1,0.5278,,original
+req-t01-backend-senior,Senior Backend Engineer,5,James Anderson,Senior Backend Engineer,8,Python; AWS,Python; AWS; distributed systems; microservices,0,2,3,0.5,0.75,0,1,0.4751,,original
+req-t01-backend-senior,Senior Backend Engineer,5,Tom Richardson,DevOps Engineer,4,Python; AWS,Python; AWS; distributed systems; microservices,0,0,3.0,0.5,0.0,0.25,0.3333333333333333,0.3656,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Ben Carter,Full-Stack Engineer,4,Python,Python; AWS; distributed systems; microservices,0,0,2.0,0.25,0.0,0.25,0.25,0.4263,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Chloe Bennett,Senior Data Analyst,5,Python,Python; AWS; distributed systems; microservices,0,0,2.0,0.25,0.0,0.0,0.0,0.3685,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Hannah Osei,Software Engineer,3,Python,Python; AWS; distributed systems; microservices,0,0,2.0,0.25,0.0,0.5,0.3333333333333333,0.4087,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Maya Levi,Data Analyst,4,Python,Python; AWS; distributed systems; microservices,0,0,2,0.25,0,0.25,0,0.3259,,original
+req-t01-backend-senior,Senior Backend Engineer,5,Derek Holloway,Licensed Ship Captain,9,-,Python; AWS; distributed systems; microservices,0,0,0.0,0.0,1.0,0.0,0.0,0.1544,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,Python; AWS; distributed systems; microservices,0,0,0,0,0,0.25,0,0.2796,,original
+req-t01-backend-senior,Senior Backend Engineer,5,Grace Kim,Senior Product Manager,7,-,Python; AWS; distributed systems; microservices,0,0,0.0,0.0,0.5,0.0,0.0,0.2497,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Isabella Rossi,Account Executive,6,-,Python; AWS; distributed systems; microservices,0,0,0.0,0.0,0.25,0.0,0.0,0.2124,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Liam Wong,Frontend Engineer,3,-,Python; AWS; distributed systems; microservices,0,0,0,0,0,0.5,0.3333333333333333,0.3706,,original
+req-t01-backend-senior,Senior Backend Engineer,5,Lucas Ferreira,UX Designer,3,-,Python; AWS; distributed systems; microservices,0,0,0.0,0.0,0.0,0.5,0.0,0.2705,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Noah Kim,Junior Data Analyst,2,Python,Python; AWS; distributed systems; microservices,0,0,0,0.25,0,0.75,0,0.3204,,original
+req-t01-backend-senior,Senior Backend Engineer,5,Olivia Martinez,Senior Product Manager,6,-,Python; AWS; distributed systems; microservices,0,0,0,0,0.25,0,0,0.2808,,original
+req-t01-backend-senior,Senior Backend Engineer,5,Priya Nair,Senior Frontend Engineer,6,-,Python; AWS; distributed systems; microservices,0,0,0.0,0.0,0.25,0.0,0.3333333333333333,0.4041,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Rachel Adler,Registered Nurse,5,-,Python; AWS; distributed systems; microservices,0,0,0.0,0.0,0.0,0.0,0.0,0.2252,,synthetic
+req-t01-backend-senior,Senior Backend Engineer,5,Sophie Turner,Senior UX Designer,5,-,Python; AWS; distributed systems; microservices,0,0,0,0,0,0,0,0.2632,,original
+req-t02-backend-mid,Backend Engineer,2,Alice Chen,Senior Backend Engineer,6,Python; Django; FastAPI; PostgreSQL; Docker,Python; Django; FastAPI; PostgreSQL; Docker,2,2,10,1,1,0,1,0.4852,,original
+req-t02-backend-mid,Backend Engineer,2,Daniel Cohen,Backend Engineer,3,Python; Django; PostgreSQL,Python; Django; FastAPI; PostgreSQL; Docker,2,2,8,0.6,0.25,0,1,0.5202,,original
+req-t02-backend-mid,Backend Engineer,2,Hannah Osei,Software Engineer,3,Python; PostgreSQL; Docker,Python; Django; FastAPI; PostgreSQL; Docker,1,1,6.0,0.6,0.25,0.0,0.3333333333333333,0.5246,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Marcus Webb,Backend Engineer,4,Python; PostgreSQL; Docker,Python; Django; FastAPI; PostgreSQL; Docker,1,1,6.0,0.6,0.5,0.0,1.0,0.4985,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Ben Carter,Full-Stack Engineer,4,Python; Django; PostgreSQL; Docker,Python; Django; FastAPI; PostgreSQL; Docker,1,1,5.0,0.8,0.5,0.0,0.25,0.5017,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Ryan Patel,Senior DevOps Engineer,7,Python; Docker,Python; Django; FastAPI; PostgreSQL; Docker,1,1,4,0.4,1,0,0.3333333333333333,0.3888,,original
+req-t02-backend-mid,Backend Engineer,2,Tom Richardson,DevOps Engineer,4,Python; Docker,Python; Django; FastAPI; PostgreSQL; Docker,0,0,3.0,0.4,0.5,0.0,0.3333333333333333,0.3605,,synthetic
+req-t02-backend-mid,Backend Engineer,2,James Anderson,Senior Backend Engineer,8,Python,Python; Django; FastAPI; PostgreSQL; Docker,0,0,2,0.2,1,0,1,0.359,,original
+req-t02-backend-mid,Backend Engineer,2,Liam Wong,Frontend Engineer,3,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,2,0,0.25,0,0.3333333333333333,0.3612,,original
+req-t02-backend-mid,Backend Engineer,2,Maya Levi,Data Analyst,4,Python,Python; Django; FastAPI; PostgreSQL; Docker,0,0,2,0.2,0.5,0,0,0.3355,,original
+req-t02-backend-mid,Backend Engineer,2,Noah Kim,Junior Data Analyst,2,Python,Python; Django; FastAPI; PostgreSQL; Docker,0,0,2,0.2,0,0,0,0.3012,,original
+req-t02-backend-mid,Backend Engineer,2,Chloe Bennett,Senior Data Analyst,5,Python,Python; Django; FastAPI; PostgreSQL; Docker,0,0,1.0,0.2,0.75,0.0,0.0,0.356,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Derek Holloway,Licensed Ship Captain,9,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0.0,0.0,1.0,0.0,0.0,0.219,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0,0,0.5,0,0,0.2802,,original
+req-t02-backend-mid,Backend Engineer,2,Grace Kim,Senior Product Manager,7,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0.0,0.0,1.0,0.0,0.0,0.2348,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Isabella Rossi,Account Executive,6,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0.0,0.0,1.0,0.0,0.0,0.2224,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Lucas Ferreira,UX Designer,3,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0.0,0.0,0.25,0.0,0.0,0.2819,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Olivia Martinez,Senior Product Manager,6,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0,0,1,0,0,0.2781,,original
+req-t02-backend-mid,Backend Engineer,2,Priya Nair,Senior Frontend Engineer,6,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0.0,0.0,1.0,0.0,0.3333333333333333,0.3905,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Rachel Adler,Registered Nurse,5,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0.0,0.0,0.75,0.0,0.0,0.2245,,synthetic
+req-t02-backend-mid,Backend Engineer,2,Sophie Turner,Senior UX Designer,5,-,Python; Django; FastAPI; PostgreSQL; Docker,0,0,0,0,0.75,0,0,0.2764,,original
+req-t03-frontend,Frontend Engineer,2,Liam Wong,Frontend Engineer,3,React; TypeScript; CSS,React; TypeScript; CSS,2,2,10,1,0.25,0,1,0.5653,,original
+req-t03-frontend,Frontend Engineer,2,Priya Nair,Senior Frontend Engineer,6,React; TypeScript; CSS,React; TypeScript; CSS,2,2,9.0,1.0,1.0,0.0,1.0,0.5972,,synthetic
+req-t03-frontend,Frontend Engineer,2,Ben Carter,Full-Stack Engineer,4,React; TypeScript,React; TypeScript; CSS,1,1,5.0,0.6666666666666666,0.5,0.0,0.25,0.4802,,synthetic
+req-t03-frontend,Frontend Engineer,2,Sophie Turner,Senior UX Designer,5,-,React; TypeScript; CSS,0,0,2,0,0.75,0,0,0.3705,,original
+req-t03-frontend,Frontend Engineer,2,Hannah Osei,Software Engineer,3,-,React; TypeScript; CSS,0,0,1.0,0.0,0.25,0.0,0.3333333333333333,0.3306,,synthetic
+req-t03-frontend,Frontend Engineer,2,Marcus Webb,Backend Engineer,4,-,React; TypeScript; CSS,0,0,1.0,0.0,0.5,0.0,0.3333333333333333,0.3992,,synthetic
+req-t03-frontend,Frontend Engineer,2,Alice Chen,Senior Backend Engineer,6,-,React; TypeScript; CSS,0,0,0,0,1,0,0.3333333333333333,0.3296,,original
+req-t03-frontend,Frontend Engineer,2,Chloe Bennett,Senior Data Analyst,5,-,React; TypeScript; CSS,0,0,0.0,0.0,0.75,0.0,0.0,0.2762,,synthetic
+req-t03-frontend,Frontend Engineer,2,Daniel Cohen,Backend Engineer,3,-,React; TypeScript; CSS,0,0,0,0,0.25,0,0.3333333333333333,0.4146,,original
+req-t03-frontend,Frontend Engineer,2,Derek Holloway,Licensed Ship Captain,9,-,React; TypeScript; CSS,0,0,0.0,0.0,1.0,0.0,0.0,0.1934,,synthetic
+req-t03-frontend,Frontend Engineer,2,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,React; TypeScript; CSS,0,0,0,0,0.5,0,0,0.2689,,original
+req-t03-frontend,Frontend Engineer,2,Grace Kim,Senior Product Manager,7,-,React; TypeScript; CSS,0,0,0.0,0.0,1.0,0.0,0.0,0.244,,synthetic
+req-t03-frontend,Frontend Engineer,2,Isabella Rossi,Account Executive,6,-,React; TypeScript; CSS,0,0,0.0,0.0,1.0,0.0,0.0,0.2321,,synthetic
+req-t03-frontend,Frontend Engineer,2,James Anderson,Senior Backend Engineer,8,-,React; TypeScript; CSS,0,0,0,0,1,0,0.3333333333333333,0.3657,,original
+req-t03-frontend,Frontend Engineer,2,Lucas Ferreira,UX Designer,3,-,React; TypeScript; CSS,0,0,0.0,0.0,0.25,0.0,0.0,0.3826,,synthetic
+req-t03-frontend,Frontend Engineer,2,Maya Levi,Data Analyst,4,-,React; TypeScript; CSS,0,0,0,0,0.5,0,0,0.276,,original
+req-t03-frontend,Frontend Engineer,2,Noah Kim,Junior Data Analyst,2,-,React; TypeScript; CSS,0,0,0,0,0,0,0,0.2418,,original
+req-t03-frontend,Frontend Engineer,2,Olivia Martinez,Senior Product Manager,6,-,React; TypeScript; CSS,0,0,0,0,1,0,0,0.2938,,original
+req-t03-frontend,Frontend Engineer,2,Rachel Adler,Registered Nurse,5,-,React; TypeScript; CSS,0,0,0.0,0.0,0.75,0.0,0.0,0.2402,,synthetic
+req-t03-frontend,Frontend Engineer,2,Ryan Patel,Senior DevOps Engineer,7,-,React; TypeScript; CSS,0,0,0,0,1,0,0.3333333333333333,0.3552,,original
+req-t03-frontend,Frontend Engineer,2,Tom Richardson,DevOps Engineer,4,-,React; TypeScript; CSS,0,0,0.0,0.0,0.5,0.0,0.3333333333333333,0.3255,,synthetic
+req-t04-data-analyst,Data Analyst,2,Maya Levi,Data Analyst,4,SQL; Python; pandas,SQL; Python; pandas,2,2,10,1,0.5,0,1,0.5838,,original
+req-t04-data-analyst,Data Analyst,2,Chloe Bennett,Senior Data Analyst,5,SQL; Python; pandas,SQL; Python; pandas,2,2,8.0,1.0,0.75,0.0,1.0,0.5283,,synthetic
+req-t04-data-analyst,Data Analyst,2,Noah Kim,Junior Data Analyst,2,SQL; Python; pandas,SQL; Python; pandas,1,2,5,1,0,0,1,0.559,,original
+req-t04-data-analyst,Data Analyst,2,Alice Chen,Senior Backend Engineer,6,Python,SQL; Python; pandas,1,1,4,0.3333333333333333,1,0,0,0.354,,original
+req-t04-data-analyst,Data Analyst,2,Daniel Cohen,Backend Engineer,3,Python,SQL; Python; pandas,1,1,4,0.3333333333333333,0.25,0,0,0.4257,,original
+req-t04-data-analyst,Data Analyst,2,Olivia Martinez,Senior Product Manager,6,SQL,SQL; Python; pandas,0,0,3,0.3333333333333333,1,0,0,0.26,,original
+req-t04-data-analyst,Data Analyst,2,Ben Carter,Full-Stack Engineer,4,Python,SQL; Python; pandas,0,0,2.0,0.3333333333333333,0.5,0.0,0.0,0.3606,,synthetic
+req-t04-data-analyst,Data Analyst,2,Hannah Osei,Software Engineer,3,Python,SQL; Python; pandas,0,0,2.0,0.3333333333333333,0.25,0.0,0.0,0.4059,,synthetic
+req-t04-data-analyst,Data Analyst,2,James Anderson,Senior Backend Engineer,8,SQL; Python,SQL; Python; pandas,0,0,2,0.6666666666666666,1,0,0,0.3592,,original
+req-t04-data-analyst,Data Analyst,2,Marcus Webb,Backend Engineer,4,Python,SQL; Python; pandas,0,0,2.0,0.3333333333333333,0.5,0.0,0.0,0.3539,,synthetic
+req-t04-data-analyst,Data Analyst,2,Ryan Patel,Senior DevOps Engineer,7,Python,SQL; Python; pandas,0,0,2,0.3333333333333333,1,0,0,0.3225,,original
+req-t04-data-analyst,Data Analyst,2,Grace Kim,Senior Product Manager,7,SQL,SQL; Python; pandas,0,0,1.0,0.3333333333333333,1.0,0.0,0.0,0.2524,,synthetic
+req-t04-data-analyst,Data Analyst,2,Tom Richardson,DevOps Engineer,4,Python,SQL; Python; pandas,0,0,1.0,0.3333333333333333,0.5,0.0,0.0,0.2756,,synthetic
+req-t04-data-analyst,Data Analyst,2,Derek Holloway,Licensed Ship Captain,9,-,SQL; Python; pandas,0,0,0.0,0.0,1.0,0.0,0.0,0.1762,,synthetic
+req-t04-data-analyst,Data Analyst,2,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,SQL; Python; pandas,0,0,0,0,0.5,0,0,0.3052,,original
+req-t04-data-analyst,Data Analyst,2,Isabella Rossi,Account Executive,6,-,SQL; Python; pandas,0,0,0.0,0.0,1.0,0.0,0.0,0.2645,,synthetic
+req-t04-data-analyst,Data Analyst,2,Liam Wong,Frontend Engineer,3,-,SQL; Python; pandas,0,0,0,0,0.25,0,0,0.2744,,original
+req-t04-data-analyst,Data Analyst,2,Lucas Ferreira,UX Designer,3,-,SQL; Python; pandas,0,0,0.0,0.0,0.25,0.0,0.0,0.2444,,synthetic
+req-t04-data-analyst,Data Analyst,2,Priya Nair,Senior Frontend Engineer,6,-,SQL; Python; pandas,0,0,0.0,0.0,1.0,0.0,0.0,0.3051,,synthetic
+req-t04-data-analyst,Data Analyst,2,Rachel Adler,Registered Nurse,5,-,SQL; Python; pandas,0,0,0.0,0.0,0.75,0.0,0.0,0.2801,,synthetic
+req-t04-data-analyst,Data Analyst,2,Sophie Turner,Senior UX Designer,5,-,SQL; Python; pandas,0,0,0,0,0.75,0,0,0.2487,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Maya Levi,Data Analyst,4,SQL; Python; Tableau,SQL; Python; Tableau,2,2,9,1,0,0,1,0.6053,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Chloe Bennett,Senior Data Analyst,5,SQL; Python,SQL; Python; Tableau,2,2,7.0,0.6666666666666666,0.25,0.0,1.0,0.5524,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Olivia Martinez,Senior Product Manager,6,SQL,SQL; Python; Tableau,1,1,4,0.3333333333333333,0.5,0,0,0.2504,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Alice Chen,Senior Backend Engineer,6,Python,SQL; Python; Tableau,0,0,3,0.3333333333333333,0.5,0,0,0.3671,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Daniel Cohen,Backend Engineer,3,Python,SQL; Python; Tableau,0,0,3,0.3333333333333333,0,0.25,0,0.4204,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Ben Carter,Full-Stack Engineer,4,Python,SQL; Python; Tableau,0,0,2.0,0.3333333333333333,0.0,0.0,0.0,0.3637,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Hannah Osei,Software Engineer,3,Python,SQL; Python; Tableau,0,0,2.0,0.3333333333333333,0.0,0.25,0.0,0.4169,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,James Anderson,Senior Backend Engineer,8,SQL; Python,SQL; Python; Tableau,0,0,2,0.6666666666666666,1,0,0,0.3787,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Marcus Webb,Backend Engineer,4,Python,SQL; Python; Tableau,0,0,2.0,0.3333333333333333,0.0,0.0,0.0,0.3533,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Noah Kim,Junior Data Analyst,2,SQL; Python,SQL; Python; Tableau,0,0,2,0.6666666666666666,0,0.5,1,0.5652,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Ryan Patel,Senior DevOps Engineer,7,Python,SQL; Python; Tableau,0,0,2,0.3333333333333333,0.75,0,0,0.3075,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Grace Kim,Senior Product Manager,7,SQL,SQL; Python; Tableau,0,0,1.0,0.3333333333333333,0.75,0.0,0.0,0.2844,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Tom Richardson,DevOps Engineer,4,Python,SQL; Python; Tableau,0,0,1.0,0.3333333333333333,0.0,0.0,0.0,0.2697,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Derek Holloway,Licensed Ship Captain,9,-,SQL; Python; Tableau,0,0,0.0,0.0,1.0,0.0,0.0,0.1882,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,SQL; Python; Tableau,0,0,0,0,0,0,0,0.3137,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Isabella Rossi,Account Executive,6,-,SQL; Python; Tableau,0,0,0.0,0.0,0.5,0.0,0.0,0.2792,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Liam Wong,Frontend Engineer,3,-,SQL; Python; Tableau,0,0,0,0,0,0.25,0,0.2787,,original
+req-t05-data-analyst-senior,Senior Data Analyst,4,Lucas Ferreira,UX Designer,3,-,SQL; Python; Tableau,0,0,0.0,0.0,0.0,0.25,0.0,0.2399,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Priya Nair,Senior Frontend Engineer,6,-,SQL; Python; Tableau,0,0,0.0,0.0,0.5,0.0,0.0,0.3344,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Rachel Adler,Registered Nurse,5,-,SQL; Python; Tableau,0,0,0.0,0.0,0.25,0.0,0.0,0.3007,,synthetic
+req-t05-data-analyst-senior,Senior Data Analyst,4,Sophie Turner,Senior UX Designer,5,-,SQL; Python; Tableau,0,0,0,0,0.25,0,0,0.2974,,original
+req-t06-devops,DevOps Engineer,5,Ryan Patel,Senior DevOps Engineer,7,Terraform; Kubernetes; AWS,Terraform; Kubernetes; CI/CD tooling; AWS,2,2,10,0.75,0.5,0,1,0.5583,,original
+req-t06-devops,DevOps Engineer,5,Alice Chen,Senior Backend Engineer,6,Terraform; Kubernetes; AWS,Terraform; Kubernetes; CI/CD tooling; AWS,2,1,8,0.75,0.25,0,0.3333333333333333,0.3943,,original
+req-t06-devops,DevOps Engineer,5,Tom Richardson,DevOps Engineer,4,Terraform; Kubernetes; AWS,Terraform; Kubernetes; CI/CD tooling; AWS,1,1,6.0,0.75,0.0,0.25,1.0,0.5607,,synthetic
+req-t06-devops,DevOps Engineer,5,James Anderson,Senior Backend Engineer,8,AWS,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,3,0.25,0.75,0,0.3333333333333333,0.3673,,original
+req-t06-devops,DevOps Engineer,5,Daniel Cohen,Backend Engineer,3,AWS,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,2,0.25,0,0.5,0.3333333333333333,0.4223,,original
+req-t06-devops,DevOps Engineer,5,Marcus Webb,Backend Engineer,4,AWS,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,2.0,0.25,0.0,0.25,0.3333333333333333,0.3636,,synthetic
+req-t06-devops,DevOps Engineer,5,Ben Carter,Full-Stack Engineer,4,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,0.0,0.25,0.25,0.3477,,synthetic
+req-t06-devops,DevOps Engineer,5,Chloe Bennett,Senior Data Analyst,5,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,0.0,0.0,0.0,0.3075,,synthetic
+req-t06-devops,DevOps Engineer,5,Derek Holloway,Licensed Ship Captain,9,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,1.0,0.0,0.0,0.2063,,synthetic
+req-t06-devops,DevOps Engineer,5,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0,0,0,0.25,0,0.2831,,original
+req-t06-devops,DevOps Engineer,5,Grace Kim,Senior Product Manager,7,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,0.5,0.0,0.0,0.2424,,synthetic
+req-t06-devops,DevOps Engineer,5,Hannah Osei,Software Engineer,3,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,0.0,0.5,0.3333333333333333,0.3996,,synthetic
+req-t06-devops,DevOps Engineer,5,Isabella Rossi,Account Executive,6,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,0.25,0.0,0.0,0.2376,,synthetic
+req-t06-devops,DevOps Engineer,5,Liam Wong,Frontend Engineer,3,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0,0,0,0.5,0.3333333333333333,0.3738,,original
+req-t06-devops,DevOps Engineer,5,Lucas Ferreira,UX Designer,3,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,0.0,0.5,0.0,0.2702,,synthetic
+req-t06-devops,DevOps Engineer,5,Maya Levi,Data Analyst,4,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0,0,0,0.25,0,0.332,,original
+req-t06-devops,DevOps Engineer,5,Noah Kim,Junior Data Analyst,2,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0,0,0,0.75,0,0.2616,,original
+req-t06-devops,DevOps Engineer,5,Olivia Martinez,Senior Product Manager,6,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0,0,0.25,0,0,0.3324,,original
+req-t06-devops,DevOps Engineer,5,Priya Nair,Senior Frontend Engineer,6,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,0.25,0.0,0.3333333333333333,0.3954,,synthetic
+req-t06-devops,DevOps Engineer,5,Rachel Adler,Registered Nurse,5,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0.0,0.0,0.0,0.0,0.0,0.2173,,synthetic
+req-t06-devops,DevOps Engineer,5,Sophie Turner,Senior UX Designer,5,-,Terraform; Kubernetes; CI/CD tooling; AWS,0,0,0,0,0,0,0,0.259,,original
+req-t07-product-manager,Senior Product Manager,5,Olivia Martinez,Senior Product Manager,6,-,customer discovery; roadmap ownership; B2B software,2,2,8,0,0.25,0,1,0.4441,,original
+req-t07-product-manager,Senior Product Manager,5,Grace Kim,Senior Product Manager,7,-,customer discovery; roadmap ownership; B2B software,1,1,4.0,0.0,0.5,0.0,1.0,0.4858,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Sophie Turner,Senior UX Designer,5,-,customer discovery; roadmap ownership; B2B software,0,0,3,0,0,0,0,0.3512,,original
+req-t07-product-manager,Senior Product Manager,5,Daniel Cohen,Backend Engineer,3,-,customer discovery; roadmap ownership; B2B software,0,0,2,0,0,0.5,0,0.3603,,original
+req-t07-product-manager,Senior Product Manager,5,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,customer discovery; roadmap ownership; B2B software,0,0,2,0,0,0.25,0,0.4356,,original
+req-t07-product-manager,Senior Product Manager,5,Isabella Rossi,Account Executive,6,-,customer discovery; roadmap ownership; B2B software,0,0,1.0,0.0,0.25,0.0,0.0,0.3987,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Alice Chen,Senior Backend Engineer,6,-,customer discovery; roadmap ownership; B2B software,0,0,0,0,0.25,0,0,0.3093,,original
+req-t07-product-manager,Senior Product Manager,5,Ben Carter,Full-Stack Engineer,4,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,0.0,0.25,0.0,0.324,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Chloe Bennett,Senior Data Analyst,5,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,0.0,0.0,0.0,0.3539,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Derek Holloway,Licensed Ship Captain,9,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,1.0,0.0,0.0,0.2257,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Hannah Osei,Software Engineer,3,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,0.0,0.5,0.0,0.2936,,synthetic
+req-t07-product-manager,Senior Product Manager,5,James Anderson,Senior Backend Engineer,8,-,customer discovery; roadmap ownership; B2B software,0,0,0,0,0.75,0,0,0.3554,,original
+req-t07-product-manager,Senior Product Manager,5,Liam Wong,Frontend Engineer,3,-,customer discovery; roadmap ownership; B2B software,0,0,0,0,0,0.5,0,0.3376,,original
+req-t07-product-manager,Senior Product Manager,5,Lucas Ferreira,UX Designer,3,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,0.0,0.5,0.0,0.3397,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Marcus Webb,Backend Engineer,4,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,0.0,0.25,0.0,0.3429,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Maya Levi,Data Analyst,4,-,customer discovery; roadmap ownership; B2B software,0,0,0,0,0,0.25,0,0.3693,,original
+req-t07-product-manager,Senior Product Manager,5,Noah Kim,Junior Data Analyst,2,-,customer discovery; roadmap ownership; B2B software,0,0,0,0,0,0.75,0,0.2999,,original
+req-t07-product-manager,Senior Product Manager,5,Priya Nair,Senior Frontend Engineer,6,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,0.25,0.0,0.0,0.3522,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Rachel Adler,Registered Nurse,5,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,0.0,0.0,0.0,0.2321,,synthetic
+req-t07-product-manager,Senior Product Manager,5,Ryan Patel,Senior DevOps Engineer,7,-,customer discovery; roadmap ownership; B2B software,0,0,0,0,0.5,0,0,0.298,,original
+req-t07-product-manager,Senior Product Manager,5,Tom Richardson,DevOps Engineer,4,-,customer discovery; roadmap ownership; B2B software,0,0,0.0,0.0,0.0,0.25,0.0,0.2827,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Sophie Turner,Senior UX Designer,5,user research; wireframing; prototyping; design system,user research; wireframing; prototyping; design system,2,2,10,1,0.25,0,1,0.6011,,original
+req-t08-ux-designer,Senior UX Designer,4,Lucas Ferreira,UX Designer,3,user research; wireframing; prototyping,user research; wireframing; prototyping; design system,1,1,5.0,0.75,0.0,0.25,1.0,0.5565,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Grace Kim,Senior Product Manager,7,user research,user research; wireframing; prototyping; design system,0,0,2.0,0.25,0.75,0.0,0.0,0.378,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Liam Wong,Frontend Engineer,3,-,user research; wireframing; prototyping; design system,0,0,2,0,0,0.25,0,0.3767,,original
+req-t08-ux-designer,Senior UX Designer,4,Olivia Martinez,Senior Product Manager,6,-,user research; wireframing; prototyping; design system,0,0,2,0,0.5,0,0,0.3152,,original
+req-t08-ux-designer,Senior UX Designer,4,Alice Chen,Senior Backend Engineer,6,-,user research; wireframing; prototyping; design system,0,0,0,0,0.5,0,0,0.2851,,original
+req-t08-ux-designer,Senior UX Designer,4,Ben Carter,Full-Stack Engineer,4,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,0.0,0.0,0.0,0.333,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Chloe Bennett,Senior Data Analyst,5,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,0.25,0.0,0.0,0.2942,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Daniel Cohen,Backend Engineer,3,-,user research; wireframing; prototyping; design system,0,0,0,0,0,0.25,0,0.314,,original
+req-t08-ux-designer,Senior UX Designer,4,Derek Holloway,Licensed Ship Captain,9,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,1.0,0.0,0.0,0.1767,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,user research; wireframing; prototyping; design system,0,0,0,0,0,0,0,0.2367,,original
+req-t08-ux-designer,Senior UX Designer,4,Hannah Osei,Software Engineer,3,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,0.0,0.25,0.0,0.2609,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Isabella Rossi,Account Executive,6,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,0.5,0.0,0.0,0.2251,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,James Anderson,Senior Backend Engineer,8,-,user research; wireframing; prototyping; design system,0,0,0,0,1,0,0,0.3089,,original
+req-t08-ux-designer,Senior UX Designer,4,Marcus Webb,Backend Engineer,4,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,0.0,0.0,0.0,0.2864,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Maya Levi,Data Analyst,4,-,user research; wireframing; prototyping; design system,0,0,0,0,0,0,0,0.292,,original
+req-t08-ux-designer,Senior UX Designer,4,Noah Kim,Junior Data Analyst,2,-,user research; wireframing; prototyping; design system,0,0,0,0,0,0.5,0,0.273,,original
+req-t08-ux-designer,Senior UX Designer,4,Priya Nair,Senior Frontend Engineer,6,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,0.5,0.0,0.0,0.4391,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Rachel Adler,Registered Nurse,5,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,0.25,0.0,0.0,0.2546,,synthetic
+req-t08-ux-designer,Senior UX Designer,4,Ryan Patel,Senior DevOps Engineer,7,-,user research; wireframing; prototyping; design system,0,0,0,0,0.75,0,0,0.2627,,original
+req-t08-ux-designer,Senior UX Designer,4,Tom Richardson,DevOps Engineer,4,-,user research; wireframing; prototyping; design system,0,0,0.0,0.0,0.0,0.0,0.0,0.2397,,synthetic
+req-t09-sales-ae,Account Executive,3,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,full-cycle pipeline management; quota attainment; CRM discipline,2,2,8,0,0.25,0,0.4,0.5175,,original
+req-t09-sales-ae,Account Executive,3,Isabella Rossi,Account Executive,6,quota attainment,full-cycle pipeline management; quota attainment; CRM discipline,2,2,7.0,0.3333333333333333,0.75,0.0,1.0,0.4543,,synthetic
+req-t09-sales-ae,Account Executive,3,Alice Chen,Senior Backend Engineer,6,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,0.75,0,0,0.2283,,original
+req-t09-sales-ae,Account Executive,3,Ben Carter,Full-Stack Engineer,4,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,0.25,0.0,0.0,0.2626,,synthetic
+req-t09-sales-ae,Account Executive,3,Chloe Bennett,Senior Data Analyst,5,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,0.5,0.0,0.0,0.3306,,synthetic
+req-t09-sales-ae,Account Executive,3,Daniel Cohen,Backend Engineer,3,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,0,0,0,0.2944,,original
+req-t09-sales-ae,Account Executive,3,Derek Holloway,Licensed Ship Captain,9,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,1.0,0.0,0.0,0.2104,,synthetic
+req-t09-sales-ae,Account Executive,3,Grace Kim,Senior Product Manager,7,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,1.0,0.0,0.0,0.3117,,synthetic
+req-t09-sales-ae,Account Executive,3,Hannah Osei,Software Engineer,3,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,0.0,0.0,0.0,0.2342,,synthetic
+req-t09-sales-ae,Account Executive,3,James Anderson,Senior Backend Engineer,8,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,1,0,0,0.2686,,original
+req-t09-sales-ae,Account Executive,3,Liam Wong,Frontend Engineer,3,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,0,0,0,0.2313,,original
+req-t09-sales-ae,Account Executive,3,Lucas Ferreira,UX Designer,3,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,0.0,0.0,0.0,0.2238,,synthetic
+req-t09-sales-ae,Account Executive,3,Marcus Webb,Backend Engineer,4,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,0.25,0.0,0.0,0.2736,,synthetic
+req-t09-sales-ae,Account Executive,3,Maya Levi,Data Analyst,4,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,0.25,0,0,0.3782,,original
+req-t09-sales-ae,Account Executive,3,Noah Kim,Junior Data Analyst,2,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,0,0.25,0,0.333,,original
+req-t09-sales-ae,Account Executive,3,Olivia Martinez,Senior Product Manager,6,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,0.75,0,0,0.2702,,original
+req-t09-sales-ae,Account Executive,3,Priya Nair,Senior Frontend Engineer,6,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,0.75,0.0,0.0,0.2548,,synthetic
+req-t09-sales-ae,Account Executive,3,Rachel Adler,Registered Nurse,5,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,0.5,0.0,0.0,0.2697,,synthetic
+req-t09-sales-ae,Account Executive,3,Ryan Patel,Senior DevOps Engineer,7,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,1,0,0,0.2576,,original
+req-t09-sales-ae,Account Executive,3,Sophie Turner,Senior UX Designer,5,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0,0,0.5,0,0,0.2022,,original
+req-t09-sales-ae,Account Executive,3,Tom Richardson,DevOps Engineer,4,-,full-cycle pipeline management; quota attainment; CRM discipline,0,0,0.0,0.0,0.25,0.0,0.0,0.2255,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Alice Chen,Senior Backend Engineer,6,Python; AWS; Kubernetes,Python; AWS; Kubernetes; CI/CD pipelines,2,2,10,0.75,0.25,0,0.3333333333333333,0.4389,,original
+req-t10-platform-adjacent,Platform Engineer,5,Ryan Patel,Senior DevOps Engineer,7,Python; AWS; Kubernetes; CI/CD pipelines,Python; AWS; Kubernetes; CI/CD pipelines,2,2,8,1,0.5,0,0.3333333333333333,0.5282,,original
+req-t10-platform-adjacent,Platform Engineer,5,Tom Richardson,DevOps Engineer,4,Python; AWS; Kubernetes; CI/CD pipelines,Python; AWS; Kubernetes; CI/CD pipelines,1,1,5.0,1.0,0.0,0.25,0.3333333333333333,0.491,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Daniel Cohen,Backend Engineer,3,Python; AWS,Python; AWS; Kubernetes; CI/CD pipelines,0,0,3,0.5,0,0.5,0.3333333333333333,0.448,,original
+req-t10-platform-adjacent,Platform Engineer,5,James Anderson,Senior Backend Engineer,8,Python; AWS,Python; AWS; Kubernetes; CI/CD pipelines,0,0,3,0.5,0.75,0,0.3333333333333333,0.3864,,original
+req-t10-platform-adjacent,Platform Engineer,5,Marcus Webb,Backend Engineer,4,Python; AWS,Python; AWS; Kubernetes; CI/CD pipelines,0,0,3.0,0.5,0.0,0.25,0.3333333333333333,0.435,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Ben Carter,Full-Stack Engineer,4,Python,Python; AWS; Kubernetes; CI/CD pipelines,0,0,2.0,0.25,0.0,0.25,0.25,0.4213,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Hannah Osei,Software Engineer,3,Python,Python; AWS; Kubernetes; CI/CD pipelines,0,0,2.0,0.25,0.0,0.5,0.3333333333333333,0.459,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Maya Levi,Data Analyst,4,Python,Python; AWS; Kubernetes; CI/CD pipelines,0,0,2,0.25,0,0.25,0,0.3298,,original
+req-t10-platform-adjacent,Platform Engineer,5,Chloe Bennett,Senior Data Analyst,5,Python,Python; AWS; Kubernetes; CI/CD pipelines,0,0,1.0,0.25,0.0,0.0,0.0,0.3443,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Priya Nair,Senior Frontend Engineer,6,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,1.0,0.0,0.25,0.0,0.3333333333333333,0.4141,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Derek Holloway,Licensed Ship Captain,9,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0.0,0.0,1.0,0.0,0.0,0.1854,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0,0,0,0.25,0,0.2798,,original
+req-t10-platform-adjacent,Platform Engineer,5,Grace Kim,Senior Product Manager,7,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0.0,0.0,0.5,0.0,0.0,0.2609,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Isabella Rossi,Account Executive,6,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0.0,0.0,0.25,0.0,0.0,0.2157,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Liam Wong,Frontend Engineer,3,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0,0,0,0.5,0.3333333333333333,0.3871,,original
+req-t10-platform-adjacent,Platform Engineer,5,Lucas Ferreira,UX Designer,3,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0.0,0.0,0.0,0.5,0.0,0.3135,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Noah Kim,Junior Data Analyst,2,Python,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0,0.25,0,0.75,0,0.3191,,original
+req-t10-platform-adjacent,Platform Engineer,5,Olivia Martinez,Senior Product Manager,6,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0,0,0.25,0,0,0.3252,,original
+req-t10-platform-adjacent,Platform Engineer,5,Rachel Adler,Registered Nurse,5,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0.0,0.0,0.0,0.0,0.0,0.2058,,synthetic
+req-t10-platform-adjacent,Platform Engineer,5,Sophie Turner,Senior UX Designer,5,-,Python; AWS; Kubernetes; CI/CD pipelines,0,0,0,0,0,0,0,0.2673,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Derek Holloway,Licensed Ship Captain,9,crew scheduling; port compliance,maritime freight logistics; crew scheduling; port compliance,2,2,8.0,0.6666666666666666,1.0,0.0,1.0,0.6508,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Alice Chen,Senior Backend Engineer,6,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0.25,0,0,0.2418,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Ben Carter,Full-Stack Engineer,4,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.0,0.25,0.0,0.2593,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Chloe Bennett,Senior Data Analyst,5,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.0,0.0,0.0,0.2337,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Daniel Cohen,Backend Engineer,3,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0,0.5,0,0.2101,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0,0.25,0,0.2339,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Grace Kim,Senior Product Manager,7,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.5,0.0,0.0,0.208,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Hannah Osei,Software Engineer,3,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.0,0.5,0.0,0.2615,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Isabella Rossi,Account Executive,6,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.25,0.0,0.0,0.2132,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,James Anderson,Senior Backend Engineer,8,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0.75,0,0,0.2293,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Liam Wong,Frontend Engineer,3,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0,0.5,0,0.2899,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Lucas Ferreira,UX Designer,3,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.0,0.5,0.0,0.2613,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Marcus Webb,Backend Engineer,4,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.0,0.25,0.0,0.2955,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Maya Levi,Data Analyst,4,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0,0.25,0,0.2292,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Noah Kim,Junior Data Analyst,2,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0,0.75,0,0.2292,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Olivia Martinez,Senior Product Manager,6,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0.25,0,0,0.2471,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Priya Nair,Senior Frontend Engineer,6,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.25,0.0,0.0,0.252,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Rachel Adler,Registered Nurse,5,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.0,0.0,0.0,0.2202,,synthetic
+req-t11-nomatch-captain,Licensed Ship Captain,5,Ryan Patel,Senior DevOps Engineer,7,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0.5,0,0,0.3425,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Sophie Turner,Senior UX Designer,5,-,maritime freight logistics; crew scheduling; port compliance,0,0,0,0,0,0,0,0.1892,,original
+req-t11-nomatch-captain,Licensed Ship Captain,5,Tom Richardson,DevOps Engineer,4,-,maritime freight logistics; crew scheduling; port compliance,0,0,0.0,0.0,0.0,0.25,0.0,0.281,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Rachel Adler,Registered Nurse,5,direct patient care; electronic health records,nursing licence; direct patient care; electronic health records,2,2,7.0,0.6666666666666666,0.5,0.0,1.0,0.5113,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Alice Chen,Senior Backend Engineer,6,-,nursing licence; direct patient care; electronic health records,0,0,0,0,0.75,0,0,0.218,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Ben Carter,Full-Stack Engineer,4,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,0.25,0.0,0.0,0.2318,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Chloe Bennett,Senior Data Analyst,5,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,0.5,0.0,0.0,0.2238,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Daniel Cohen,Backend Engineer,3,-,nursing licence; direct patient care; electronic health records,0,0,0,0,0,0,0,0.1896,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Derek Holloway,Licensed Ship Captain,9,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,1.0,0.0,0.0,0.2243,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,nursing licence; direct patient care; electronic health records,0,0,0,0,0.25,0,0,0.2145,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Grace Kim,Senior Product Manager,7,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,1.0,0.0,0.0,0.1969,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Hannah Osei,Software Engineer,3,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,0.0,0.0,0.0,0.2561,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Isabella Rossi,Account Executive,6,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,0.75,0.0,0.0,0.1779,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,James Anderson,Senior Backend Engineer,8,-,nursing licence; direct patient care; electronic health records,0,0,0,0,1,0,0,0.1972,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Liam Wong,Frontend Engineer,3,-,nursing licence; direct patient care; electronic health records,0,0,0,0,0,0,0,0.2209,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Lucas Ferreira,UX Designer,3,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,0.0,0.0,0.0,0.188,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Marcus Webb,Backend Engineer,4,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,0.25,0.0,0.0,0.1989,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Maya Levi,Data Analyst,4,-,nursing licence; direct patient care; electronic health records,0,0,0,0,0.25,0,0,0.2061,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Noah Kim,Junior Data Analyst,2,-,nursing licence; direct patient care; electronic health records,0,0,0,0,0,0.25,0,0.2413,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Olivia Martinez,Senior Product Manager,6,-,nursing licence; direct patient care; electronic health records,0,0,0,0,0.75,0,0,0.198,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Priya Nair,Senior Frontend Engineer,6,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,0.75,0.0,0.0,0.2797,,synthetic
+req-t12-nomatch-nurse,Registered Nurse,3,Ryan Patel,Senior DevOps Engineer,7,-,nursing licence; direct patient care; electronic health records,0,0,0,0,1,0,0,0.2486,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Sophie Turner,Senior UX Designer,5,-,nursing licence; direct patient care; electronic health records,0,0,0,0,0.5,0,0,0.1863,,original
+req-t12-nomatch-nurse,Registered Nurse,3,Tom Richardson,DevOps Engineer,4,-,nursing licence; direct patient care; electronic health records,0,0,0.0,0.0,0.25,0.0,0.0,0.2305,,synthetic
+req-t13-software-broad,Software Engineer,3,Alice Chen,Senior Backend Engineer,6,Python; Docker; REST APIs; PostgreSQL,Python; Docker; REST APIs; PostgreSQL,2,2,10,1,0.75,0,0.3333333333333333,0.4322,,original
+req-t13-software-broad,Software Engineer,3,Daniel Cohen,Backend Engineer,3,Python; REST APIs; PostgreSQL,Python; Docker; REST APIs; PostgreSQL,2,2,9,0.75,0,0,0.3333333333333333,0.5223,,original
+req-t13-software-broad,Software Engineer,3,Hannah Osei,Software Engineer,3,Python; Docker; REST APIs; PostgreSQL,Python; Docker; REST APIs; PostgreSQL,2,2,9.0,1.0,0.0,0.0,1.0,0.6151,,synthetic
+req-t13-software-broad,Software Engineer,3,Ben Carter,Full-Stack Engineer,4,Python; Docker; REST APIs; PostgreSQL,Python; Docker; REST APIs; PostgreSQL,2,2,7.0,1.0,0.25,0.0,0.25,0.4839,,synthetic
+req-t13-software-broad,Software Engineer,3,Marcus Webb,Backend Engineer,4,Python; Docker; REST APIs; PostgreSQL,Python; Docker; REST APIs; PostgreSQL,2,2,7.0,1.0,0.25,0.0,0.3333333333333333,0.4905,,synthetic
+req-t13-software-broad,Software Engineer,3,Ryan Patel,Senior DevOps Engineer,7,Python; Docker,Python; Docker; REST APIs; PostgreSQL,1,1,5,0.5,1,0,0.3333333333333333,0.3925,,original
+req-t13-software-broad,Software Engineer,3,James Anderson,Senior Backend Engineer,8,Python,Python; Docker; REST APIs; PostgreSQL,0,1,3,0.25,1,0,0.3333333333333333,0.3485,,original
+req-t13-software-broad,Software Engineer,3,Liam Wong,Frontend Engineer,3,REST APIs,Python; Docker; REST APIs; PostgreSQL,0,1,3,0.25,0,0,0.3333333333333333,0.3756,,original
+req-t13-software-broad,Software Engineer,3,Maya Levi,Data Analyst,4,Python,Python; Docker; REST APIs; PostgreSQL,0,0,3,0.25,0.25,0,0,0.3785,,original
+req-t13-software-broad,Software Engineer,3,Tom Richardson,DevOps Engineer,4,Python; Docker,Python; Docker; REST APIs; PostgreSQL,0,0,3.0,0.5,0.25,0.0,0.3333333333333333,0.3769,,synthetic
+req-t13-software-broad,Software Engineer,3,Chloe Bennett,Senior Data Analyst,5,Python,Python; Docker; REST APIs; PostgreSQL,0,0,2.0,0.25,0.5,0.0,0.0,0.3756,,synthetic
+req-t13-software-broad,Software Engineer,3,Noah Kim,Junior Data Analyst,2,Python,Python; Docker; REST APIs; PostgreSQL,0,0,2,0.25,0,0.25,0,0.3367,,original
+req-t13-software-broad,Software Engineer,3,Priya Nair,Senior Frontend Engineer,6,-,Python; Docker; REST APIs; PostgreSQL,0,0,1.0,0.0,0.75,0.0,0.3333333333333333,0.3994,,synthetic
+req-t13-software-broad,Software Engineer,3,Derek Holloway,Licensed Ship Captain,9,-,Python; Docker; REST APIs; PostgreSQL,0,0,0.0,0.0,1.0,0.0,0.0,0.2356,,synthetic
+req-t13-software-broad,Software Engineer,3,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,Python; Docker; REST APIs; PostgreSQL,0,0,0,0,0.25,0,0,0.2962,,original
+req-t13-software-broad,Software Engineer,3,Grace Kim,Senior Product Manager,7,-,Python; Docker; REST APIs; PostgreSQL,0,0,0.0,0.0,1.0,0.0,0.0,0.2522,,synthetic
+req-t13-software-broad,Software Engineer,3,Isabella Rossi,Account Executive,6,-,Python; Docker; REST APIs; PostgreSQL,0,0,0.0,0.0,0.75,0.0,0.0,0.246,,synthetic
+req-t13-software-broad,Software Engineer,3,Lucas Ferreira,UX Designer,3,-,Python; Docker; REST APIs; PostgreSQL,0,0,0.0,0.0,0.0,0.0,0.0,0.3264,,synthetic
+req-t13-software-broad,Software Engineer,3,Olivia Martinez,Senior Product Manager,6,-,Python; Docker; REST APIs; PostgreSQL,0,0,0,0,0.75,0,0,0.3059,,original
+req-t13-software-broad,Software Engineer,3,Rachel Adler,Registered Nurse,5,-,Python; Docker; REST APIs; PostgreSQL,0,0,0.0,0.0,0.5,0.0,0.0,0.2363,,synthetic
+req-t13-software-broad,Software Engineer,3,Sophie Turner,Senior UX Designer,5,-,Python; Docker; REST APIs; PostgreSQL,0,0,0,0,0.5,0,0,0.3117,,original
+req-t14-fullstack,Full-Stack Engineer,2,Ben Carter,Full-Stack Engineer,4,React; TypeScript; Python; REST APIs; relational databases,React; TypeScript; Python; REST APIs; relational databases,2,2,9.0,1.0,0.5,0.0,1.0,0.5875,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Liam Wong,Frontend Engineer,3,React; TypeScript; REST APIs,React; TypeScript; Python; REST APIs; relational databases,1,1,5,0.6,0.25,0,0.25,0.5225,,original
+req-t14-fullstack,Full-Stack Engineer,2,Alice Chen,Senior Backend Engineer,6,Python; REST APIs,React; TypeScript; Python; REST APIs; relational databases,1,1,4,0.4,1,0,0.25,0.406,,original
+req-t14-fullstack,Full-Stack Engineer,2,Daniel Cohen,Backend Engineer,3,Python; REST APIs,React; TypeScript; Python; REST APIs; relational databases,1,1,4,0.4,0.25,0,0.25,0.4884,,original
+req-t14-fullstack,Full-Stack Engineer,2,Hannah Osei,Software Engineer,3,Python; REST APIs,React; TypeScript; Python; REST APIs; relational databases,1,1,4.0,0.4,0.25,0.0,0.25,0.4533,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Priya Nair,Senior Frontend Engineer,6,React; TypeScript,React; TypeScript; Python; REST APIs; relational databases,1,1,4.0,0.4,1.0,0.0,0.25,0.5088,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,James Anderson,Senior Backend Engineer,8,Python,React; TypeScript; Python; REST APIs; relational databases,0,1,3,0.2,1,0,0.25,0.3958,,original
+req-t14-fullstack,Full-Stack Engineer,2,Marcus Webb,Backend Engineer,4,Python; REST APIs,React; TypeScript; Python; REST APIs; relational databases,0,0,3.0,0.4,0.5,0.0,0.25,0.4516,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Ryan Patel,Senior DevOps Engineer,7,Python,React; TypeScript; Python; REST APIs; relational databases,0,0,3,0.2,1,0,0.25,0.3962,,original
+req-t14-fullstack,Full-Stack Engineer,2,Maya Levi,Data Analyst,4,Python,React; TypeScript; Python; REST APIs; relational databases,0,0,2,0.2,0.5,0,0,0.3647,,original
+req-t14-fullstack,Full-Stack Engineer,2,Noah Kim,Junior Data Analyst,2,Python,React; TypeScript; Python; REST APIs; relational databases,0,0,2,0.2,0,0,0,0.3205,,original
+req-t14-fullstack,Full-Stack Engineer,2,Olivia Martinez,Senior Product Manager,6,-,React; TypeScript; Python; REST APIs; relational databases,0,0,2,0,1,0,0,0.3278,,original
+req-t14-fullstack,Full-Stack Engineer,2,Tom Richardson,DevOps Engineer,4,Python,React; TypeScript; Python; REST APIs; relational databases,0,0,2.0,0.2,0.5,0.0,0.25,0.3875,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Chloe Bennett,Senior Data Analyst,5,Python,React; TypeScript; Python; REST APIs; relational databases,0,0,1.0,0.2,0.75,0.0,0.0,0.347,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Derek Holloway,Licensed Ship Captain,9,-,React; TypeScript; Python; REST APIs; relational databases,0,0,0.0,0.0,1.0,0.0,0.0,0.2135,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Emma Garcia,Account Executive (B2B SaaS Sales),4,-,React; TypeScript; Python; REST APIs; relational databases,0,0,0,0,0.5,0,0,0.3082,,original
+req-t14-fullstack,Full-Stack Engineer,2,Grace Kim,Senior Product Manager,7,-,React; TypeScript; Python; REST APIs; relational databases,0,0,0.0,0.0,1.0,0.0,0.0,0.275,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Isabella Rossi,Account Executive,6,-,React; TypeScript; Python; REST APIs; relational databases,0,0,0.0,0.0,1.0,0.0,0.0,0.2578,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Lucas Ferreira,UX Designer,3,-,React; TypeScript; Python; REST APIs; relational databases,0,0,0.0,0.0,0.25,0.0,0.0,0.3569,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Rachel Adler,Registered Nurse,5,-,React; TypeScript; Python; REST APIs; relational databases,0,0,0.0,0.0,0.75,0.0,0.0,0.2542,,synthetic
+req-t14-fullstack,Full-Stack Engineer,2,Sophie Turner,Senior UX Designer,5,-,React; TypeScript; Python; REST APIs; relational databases,0,0,0,0,0.75,0,0,0.3356,,original

@@ -1,0 +1,17 @@
+# Secrets - never commit. .env holds the OpenAI key and, when live mode is configured,
+# real Gmail/Google Calendar OAuth tokens copied in from HRCopilot_LIVE_CREDENTIALS.env.
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# n8n's own database and any container-local state, if ever run outside Docker
+n8n_storage/
+*.sqlite
+
+# Dev-only material kept out of this repo on purpose - not part of the delivery set
+docs/source/
+n8n/build_v2_workflow.py
