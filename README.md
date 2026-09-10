@@ -17,7 +17,7 @@ for Recruiters").
 <img width="1900" height="1080" alt="architecture_diagram" src="https://github.com/user-attachments/assets/33a0f136-3ac3-4356-9fe4-79479784bd81" />
 
 ### N8N
-<img width="755" height="555" alt="image" src="https://github.com/user-attachments/assets/43325007-433d-4f4c-a8f9-c3117faf4f03" />
+<img width="1221" height="542" alt="image" src="https://github.com/user-attachments/assets/961d70b6-2b61-47fe-a69e-e58d5b052cb4" />
 
 <img width="1791" height="446" alt="image" src="https://github.com/user-attachments/assets/f7f3f435-5f5f-4a28-bb25-139b1eafeb42" />
 
