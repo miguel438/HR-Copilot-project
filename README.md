@@ -8,7 +8,19 @@ Built for the AI Developers Course final project (scenario #3, "AI-based Persona
 for Recruiters").
 
 
-<img width="1728" height="1022" alt="image" src="https://github.com/user-attachments/assets/242a7e74-f68f-4500-bfdd-2ff0d117843a" />
+
+<img width="1752" height="941" alt="image" src="https://github.com/user-attachments/assets/b3da7f52-a388-40dd-8322-33f6492b2346" />
+
+<img width="1300" height="962" alt="image" src="https://github.com/user-attachments/assets/fba163ef-427b-4ef1-834c-88203a376cd1" />
+
+## Architecture
+<img width="1900" height="1080" alt="architecture_diagram" src="https://github.com/user-attachments/assets/33a0f136-3ac3-4356-9fe4-79479784bd81" />
+
+### N8N
+<img width="755" height="555" alt="image" src="https://github.com/user-attachments/assets/43325007-433d-4f4c-a8f9-c3117faf4f03" />
+
+<img width="1791" height="446" alt="image" src="https://github.com/user-attachments/assets/f7f3f435-5f5f-4a28-bb25-139b1eafeb42" />
+
 
 
 ## Requirements
