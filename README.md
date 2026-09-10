@@ -7,6 +7,10 @@ invitations, and logs outcomes to an ATS via n8n.
 Built for the AI Developers Course final project (scenario #3, "AI-based Personal Assistant
 for Recruiters").
 
+
+<img width="1728" height="1022" alt="image" src="https://github.com/user-attachments/assets/242a7e74-f68f-4500-bfdd-2ff0d117843a" />
+
+
 ## Requirements
 
 - Docker Desktop.
